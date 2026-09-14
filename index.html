@@ -1186,6 +1186,98 @@ body.dark .plate-fig svg .dk,body.dark .plate-fig svg .dkS{fill:rgba(230,231,225
   .hm-rs{display:none}
 }
 
+/* ══ 시트 페이지 — 계기판 ══
+   홈과 같은 결로 맞춘다: 좌측 레일, 괘선 제목 줄, 등폭 수치 표. */
+#page-sheets.on{grid-template-columns:280px minmax(0,1fr);gap:28px}
+
+.snav{top:78px;gap:0;padding:24px 0 0;background:none;border:0}
+.snav .navtitle{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--faint);
+  text-transform:none;padding:0 12px 9px;margin:0}
+.snav button{display:flex;align-items:center;gap:14px;width:100%;min-height:44px;padding:13px 12px;
+  border:0;border-left:2px solid transparent;border-radius:3px;background:none;text-align:left;
+  font-family:var(--sans);font-size:14px;font-weight:400;color:var(--num)}
+.snav button i{display:none}
+.snav button b{font-family:var(--mono);font-size:10px;font-weight:400;color:var(--faint);width:18px;flex:none}
+.snav button .sn-nm{flex-grow:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.snav button em{font-style:normal;font-family:var(--mono);font-size:15px;color:var(--head);
+  margin-left:auto;flex:none;font-variant-numeric:tabular-nums}
+.snav button:hover{background:var(--surface);border-left-color:var(--accent);color:var(--fg)}
+.snav button[aria-current="true"]{background:var(--surface);border-left-color:var(--accent);
+  color:var(--fg);font-weight:500}
+.snav button[aria-current="true"] em{color:var(--accent-ink)}
+.snav .navblock{margin-top:18px;padding-top:14px;border-top:1px solid var(--line-soft)}
+.snav .navback{margin-top:10px;padding-top:14px;border-top:1px solid var(--line-soft);
+  font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.06em}
+.snav .navback:hover{background:none;border-left-color:transparent;color:var(--accent-ink)}
+
+.sheadwrap{padding:26px 0 15px;border-bottom:1px solid var(--line);margin-bottom:20px;
+  display:flex;flex-direction:column;gap:7px}
+.sheadwrap .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim);
+  text-transform:none;display:block}
+.sheadwrap .hdot{display:none}
+.sheadwrap h1{font-family:var(--sans);font-size:clamp(20px,2.6vw,25px);font-weight:600;
+  letter-spacing:-.025em;margin:0;color:var(--head)}
+.sheadwrap p{font-size:12.5px;color:var(--dim);line-height:1.7;max-width:62ch;margin:0;font-weight:400}
+.exall{align-self:flex-start;margin-top:5px;background:none;border:1px solid var(--axis);border-radius:3px;
+  font-family:var(--mono);font-size:11px;color:var(--dim);padding:8px 14px;letter-spacing:.06em}
+
+.acc{border:1px solid var(--line);border-radius:4px;background:var(--surface);margin-bottom:14px}
+.acc-head{padding:14px 16px;gap:12px}
+.acc-head::before{display:none}
+.acc-head .aname{font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:-.01em}
+.acc-head .acount{font-family:var(--mono);font-size:11px;color:var(--accent-ink);background:none;
+  padding:0;border-radius:0}
+.acc-head .adesc{font-size:11.5px;font-weight:400}
+.acc-head:hover{background:var(--surface2)}
+.acc.open>.acc-head{background:var(--surface2);border-bottom:1px solid var(--line)}
+.acc-body{padding:2px 16px 20px}
+
+.quickadd{padding:0 0 14px}
+.chart-card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:15px 17px 8px}
+.chart-top{margin-bottom:6px;padding:0}
+.charttitle{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dim)}
+.legend{font-size:10px;gap:13px}
+.legend i.dash{border-color:var(--danger)}
+.grid-l{stroke:var(--track)}
+.axis-l{stroke:var(--axis);stroke-width:1.2}
+.axis-t{font-family:var(--mono);font-size:10px;fill:var(--faint)}
+.axis-title{font-family:var(--sans);font-size:10px;fill:var(--dim);letter-spacing:0;text-transform:none}
+.dot-lab{font-family:var(--sans);font-size:10.5px;fill:var(--num)}
+.flag-ring{stroke:var(--danger);stroke-width:2;stroke-dasharray:none}
+.gap{height:16px}
+
+.tblwrap{background:none;border:0;border-radius:0;padding:0}
+.tbl th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--faint);font-weight:400;
+  padding:0 10px 9px;border-bottom:1px solid var(--line)}
+.tbl td{padding:11px 10px;border-bottom:1px solid var(--line-soft);vertical-align:middle}
+.tbl td.num{font-variant-numeric:tabular-nums}
+.tbl .bean-n,.tbl .bean-s{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbl .bean-n{font-weight:500;letter-spacing:-.01em}
+.tbl td:nth-child(2){min-width:150px;max-width:260px}
+
+@media(max-width:899px){
+  #page-sheets.on{grid-template-columns:minmax(0,1fr);gap:0}
+  .snav{position:static;padding:14px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .snav .navtitle{display:none}
+  .snav button{flex-direction:column;align-items:flex-start;gap:4px;padding:10px 11px;
+    border:1px solid var(--line);border-left-width:1px;border-radius:3px;background:var(--surface);font-size:12.5px}
+  .snav button b{width:auto;font-size:9px;letter-spacing:.12em}
+  .snav button em{margin-left:0;font-size:15px}
+  .snav button[aria-current="true"]{border-color:var(--accent)}
+  .snav .navblock{grid-column:1/-1;margin:6px 0 0;padding:0;border:0}
+  .snav .navblock .navtitle{display:none}
+  .snav .navall,.snav .navback{flex-direction:row;align-items:center;border-top:0;margin:0;padding:12px;
+    min-height:44px;background:none;border:1px solid var(--line)}
+  .snav .navback{grid-column:1/-1;margin-top:8px;justify-content:center}
+  .sheadwrap{padding:20px 0 13px}
+  /* 760px 폭 좌표를 그대로 줄이면 눈금 글자가 4px가 된다. 같은 내용은 표에 있다. */
+  .chart-card,.chart-card+.gap{display:none}
+  /* 좁은 화면에서는 숨은 열이 많으므로 최소폭을 풀어 남은 열이 다 보이게 한다 */
+  .tbl{min-width:0}
+  .tbl td:nth-child(2){min-width:96px;max-width:none}
+  .tbl th,.tbl td{padding-left:7px;padding-right:7px}
+}
+
 /* ══ 계기판 보정 ══
    어두운 바탕으로 바뀌면서 흰색이 박혀 있던 자리를 토큰으로 되돌린다. */
 .save,.addbtn.solid,.seg button[aria-pressed="true"],.type-seg button[aria-pressed="true"],
@@ -1194,7 +1286,7 @@ body.dark .plate-fig svg .dk,body.dark .plate-fig svg .dkS{fill:rgba(230,231,225
 .save:hover,.addbtn.solid:hover,.ovact button.solid:hover{filter:brightness(1.08);color:var(--onaccent)}
 .addbtn:hover{background:var(--accent);color:var(--onaccent);border-color:var(--accent)}
 .f input:focus,.f select:focus,.f textarea:focus{background:var(--surface2)}
-.chip.flag{background:var(--slate);border-color:var(--slate);color:var(--fg)}
+.chip.flag{background:none;border-color:var(--danger);color:var(--danger)}
 .ovnum,.ritem .rkind,.chiprow button i svg,.promo.wide .wmark svg{color:var(--onaccent)}
 .guidebtn:hover,.pour-r .pstir.on{color:var(--onaccent)}
 .danger{color:var(--danger);border-color:color-mix(in srgb,var(--danger) 45%,transparent)}
@@ -1704,7 +1796,7 @@ function secHead(title,note){
 
 /* ============ 산포도 ============ */
 function scatter(rows,cfg){
-  const W=760,H=320,P={l:56,r:24,t:16,b:46};
+  const W=760,H=320,P={l:56,r:24,t:28,b:46};
   if(!rows.length) return `<p class="nodata">표시할 데이터가 없다.</p>`;
   const xs=rows.map(cfg.x),ys=rows.map(cfg.y);
   let x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
@@ -1723,7 +1815,7 @@ function scatter(rows,cfg){
   s+=`<line class="axis-l" x1="${P.l}" y1="${H-P.b}" x2="${W-P.r}" y2="${H-P.b}"/>`;
   s+=`<line class="axis-l" x1="${P.l}" y1="${P.t}" x2="${P.l}" y2="${H-P.b}"/>`;
   s+=`<text class="axis-title" x="${W-P.r}" y="${H-6}" text-anchor="end">${cfg.xl}</text>`;
-  s+=`<text class="axis-title" x="${P.l-10}" y="${P.t-4}" text-anchor="end">${cfg.yl}</text>`;
+  s+=`<text class="axis-title" x="${P.l-10}" y="12" text-anchor="end">${cfg.yl}</text>`;
   rows.forEach(r=>{
     const cx=px(cfg.x(r)),cy=py(cfg.y(r)),rad=5+(Number(r.rating)||3)*1.7;
     if(r.channel) s+=`<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${(rad+6).toFixed(1)}" fill="none" class="flag-ring"/>`;
@@ -1731,7 +1823,7 @@ function scatter(rows,cfg){
       ? `<circle class="dot" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad.toFixed(1)}" fill="none" stroke="var(--accent)" stroke-width="2.4"><title>${esc(r.bean)} · ${r.date} · ★${r.rating}</title></circle>`
       : `<circle class="dot" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${rad.toFixed(1)}" fill="var(--accent)" fill-opacity=".85"><title>${esc(r.bean)} · ${r.date} · ★${r.rating}</title></circle>`;
     const flip=cx>W-190;
-    s+=`<text class="dot-lab" x="${(cx+(flip?-rad-9:rad+9)).toFixed(1)}" y="${(cy+3.5).toFixed(1)}" text-anchor="${flip?"end":"start"}">${esc(String(r.bean).slice(0,16))}</text>`;
+    s+=`<text class="dot-lab" x="${(cx+(flip?-rad-9:rad+9)).toFixed(1)}" y="${(cy+3.5).toFixed(1)}" text-anchor="${flip?"end":"start"}">${esc(plotLabel(r.bean))}</text>`;
   });
   return s+`</svg>`;
 }
@@ -2404,17 +2496,20 @@ function bodyFor(x){
 function renderSheetsPage(){
   document.getElementById("snav").innerHTML=`
     <div class="navtitle">시트</div>
-    ${SHEETS.map(x=>`<button id="nav-${x.id}" style="--c:${x.color}" onclick="openSheets('${x.id}')">
-      <i></i><b>${x.no}</b>${x.name}<em>${countOf(x.key)}</em></button>`).join("")}
+    ${SHEETS.map((x,k)=>`<button id="nav-${x.id}" style="--c:${x.color}" onclick="openSheets('${x.id}')">
+      <b>${String(k+1).padStart(2,"0")}</b><span class="sn-nm">${x.name}</span><em>${countOf(x.key)}</em></button>`).join("")}
     <div class="navblock">
       <div class="navtitle">모아 보기</div>
-      <button id="nav-all" class="navall" onclick="openSheets()"><i></i>전체 보기<em>${SHEETS.length}</em></button>
+      <button id="nav-all" class="navall" onclick="openSheets()"><b>ALL</b><span class="sn-nm">전체 보기</span><em>${SHEETS.length}</em></button>
     </div>
-    <button class="navback" onclick="goHome()"><i></i>← 색인으로</button>`;
+    <button class="navback" onclick="goHome()"><span class="sn-nm">← 홈으로</span></button>`;
 
   document.getElementById("scontent").innerHTML=`
     <div class="sheadwrap">
-      <div class="eyebrow"><span class="hdot"></span>${focusId?sheetById(focusId).no+" · "+sheetById(focusId).en:"전체 보기"}</div>
+      <div class="eyebrow">${focusId
+        ?String(SHEETS.findIndex(x=>x.id===focusId)+1).padStart(2,"0")+" · "+sheetById(focusId).en
+          +" · "+countOf(sheetById(focusId).key)+unitOf(sheetById(focusId).key)
+        :"ALL SHEETS · "+SHEETS.length+"장"}</div>
       <h1>${focusId?sheetById(focusId).name:"전체 보기"}</h1>
       <p>${focusId?sheetById(focusId).desc:"여섯 시트를 한 페이지에 모았다. 제목 줄을 누르면 접히고 펼쳐진다."}</p>
       ${focusId?"":`<button class="exall" id="exall" onclick="expandAll()">전부 펼치기</button>`}
@@ -3584,9 +3679,10 @@ function recCatChange(){
 }
 
 /* ============ 버전 정보 ============ */
-const APP_VERSION="v1.24.0";
+const APP_VERSION="v1.25.0";
 const APP_BUILD="2026-09-14";
 const CHANGELOG=[
+ ["v1.25.0","2026-09-14","시트 페이지도 계기판 구조로 통일 — 좌측 목록의 한자 번호를 01~06으로 바꾸고 홈과 같은 레일로 맞춤 · 제목 줄에 시트 번호·영문명·건수를 한 줄로 표기하고 괘선으로 정리 · 표를 등폭 수치와 가는 괘선으로 다시 입힘 — 원두 칸이 두 줄로 깨지던 문제 해결 · 채널링 표시를 붉은 테두리로 바꿔 경고로 읽히게 함 · 좁은 화면에서는 시트 목록이 3칸 타일이 되고, 눈금 글자가 4px까지 줄어 읽을 수 없던 좌표 그림을 감춰 표만 남김 (같은 내용은 표에 있다) · 좌표 그림의 세로축 이름이 첫 눈금과 겹치던 문제 해결"],
  ["v1.24.0","2026-09-14","디자인을 계기판으로 전면 교체 — 흑연 바탕에 앰버 한 색, 숫자는 등폭으로 통일 · 홈을 추출 판독으로 재구성: 최근 샷의 압력 곡선과 도징·비율·시간 등 6개 수치, 샷/푸어 산점도(추출시간×별점), 요약 4칸, 최근 기록 표 · 시트 목록을 넓은 화면에서는 좌측 레일로, 좁은 화면에서는 3칸 타일로 배치 · 기록 줄을 누르면 바로 수정 창이 열린다 · 다크가 기본이 되고 토글은 밝은 모눈 배색으로 간다 — 여태 다크 규칙이 body.dark를 보고 있어 토글과 어긋나 있던 문제를 함께 해결 · 도감 표지와 도판은 제거"],
  ["v1.23.0","2026-09-14","화면에 보이지 않던 구버전 홈 화면 코드를 걷어냄(204줄) · 동기화 합치기에서 같은 기록이 중복으로 들어가던 문제 해결 — 항목 순서가 달라도 같은 기록으로 판정 · 필터 기록 한 건의 원두명이 아카이브와 어긋나 원두 정보가 붙지 않던 문제 해결 · 칼리타 웨이브 185와 하리오 스위치를 장비 목록에 추가해 드리퍼 선택에서 바로 고를 수 있게 함 · 장비 순서 저장이 실패하면 알려줌 · 하단 버전 날짜 표기 정정"],
  ["v1.22.4","2026-08-11","모바일 표 정리 — 원두명이 한 글자씩 세로로 쪼개지던 문제 해결(두 줄까지 표시 후 말줄임), 좁은 화면에서는 드리퍼·비율 열을 숨기고 행을 누르면 상세에서 확인하도록 변경"],
