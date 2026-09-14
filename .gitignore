@@ -1,0 +1,2 @@
+# build-artifact.sh 생성물 — index.html에서 만들어지므로 추적하지 않는다
+build/
