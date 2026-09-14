@@ -91,7 +91,17 @@ localStorage는 **주소(오리진)마다 따로 논다.** 기기나 게시 위�
 선택되지 않은 B 활판 · C 좌표 원안은 캔버스 2쪽에 남겨 두었다
 (`BDesktop` · `BMobile` · `CDesktop` · `CMobile`).
 
-캔버스는 https://claude.ai/code/artifact/87e69c50-0cf9-4802-95f1-53c1aaaeaf52
+### 반응형 미리보기
+
+`design/home-preview.html`은 확정안을 실제로 동작하는 한 페이지로 만든 것이다.
+아트보드가 아니라 진짜 반응형이라, 폰으로 열면 모바일 레이아웃이,
+PC로 열면 데스크탑 레이아웃이 나온다. 900px가 경계다.
+
+색상은 페이지 오른쪽 위 칩으로 바꾸고, 선택은 localStorage에 남는다.
+이 파일이 `index.html`에 옮겨 심을 실제 마크업·CSS의 원형이다.
+
+- 미리보기 https://claude.ai/code/artifact/e0c6f449-9dc5-4bd1-8dcf-fddcacb4e3a5
+- 시안 캔버스 https://claude.ai/code/artifact/87e69c50-0cf9-4802-95f1-53c1aaaeaf52
 
 확정안을 앱에 옮길 때 `index.html`의 스타일시트를 새로 쓰면서
 쓰이지 않는 클래스도 함께 정리한다.
