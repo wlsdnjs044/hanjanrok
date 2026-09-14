@@ -66,3 +66,19 @@ localStorage는 **주소(오리진)마다 따로 논다.** 기기나 게시 위�
 그 시절의 흔적이며, 단독 실행 시에는 여전히 유효하다.
 
 변경 이력은 앱 하단의 버전 버튼에서 볼 수 있다 (`index.html`의 `CHANGELOG` 배열).
+
+## 재디자인 시안
+
+`design/`에 전면 재디자인 시안 3안의 소스가 들어 있다. 아트보드마다 한 파일이고,
+`canvas.json`이 캔버스 배치와 설명 메모를 담는다.
+
+| 시안 | 방향 | 아트보드 |
+|---|---|---|
+| A · 계기판 | 흑연 바탕, 압력·유량 곡선과 등폭 수치 | `Main.dc.html` · `AMobile.dc.html` |
+| B · 활판 | 종이·먹, 한자 번호와 괘선 조판 | `BDesktop.dc.html` · `BMobile.dc.html` |
+| C · 좌표 | 모눈 위 산점도, 점이 곧 기록 | `CDesktop.dc.html` · `CMobile.dc.html` |
+
+데스크탑 1440×900, 모바일 390×844 고정 크기다. 시안 캔버스는
+https://claude.ai/code/artifact/87e69c50-0cf9-4802-95f1-53c1aaaeaf52
+
+시안이 확정되면 `index.html`의 스타일시트를 새로 쓰면서 쓰이지 않는 클래스도 함께 정리한다.
