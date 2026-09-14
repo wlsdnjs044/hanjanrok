@@ -1,0 +1,10 @@
+# build-artifact.sh 생성물 — index.html에서 만들어지므로 추적하지 않는다
+build/
+
+# 캔버스 생성물 — design/*.dc.html 과 canvas.json 에서 만들어진다 (2.5MB)
+design/hanjanrok-redesign.html
+
+# 브라우저 검증용 임시 설치 — 저장소에 포함하지 않는다
+node_modules/
+package.json
+package-lock.json

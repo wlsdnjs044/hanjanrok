@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #2F6FEB; text-decoration: none; }
+    a:hover { color: #1D53C0; }
+  </style>
+</helmet>
+
+<div style="width: 390px; height: 844px; background: #FBFBFC; color: #17202B; font-family: 'Noto Sans KR', 'Barlow', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden; background-image: linear-gradient(#EDF1F6 1px, transparent 1px), linear-gradient(90deg, #EDF1F6 1px, transparent 1px); background-size: 24px 24px;">
+
+  <!-- 상단 -->
+  <div style="padding: 16px 20px; background: #FFFFFF; border-bottom: 1px solid #DDE4EC; display: flex; align-items: center; gap: 12px;">
+    <div style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1;">
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 23px; font-weight: 700; line-height: 1;">한잔록</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #8B96A5; letter-spacing: 0.2em;">PLOT VIEW</span>
+    </div>
+    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8B96A5; font-variant-numeric: tabular-nums;">2026-09-14</span>
+  </div>
+
+  <!-- 세그먼트 -->
+  <div style="padding: 14px 20px 0; display: flex; gap: 0; background: #FBFBFC;">
+    <div style="flex-grow: 1; height: 44px; display: flex; align-items: center; justify-content: center; gap: 7px; background: #17202B; color: #FFFFFF; border-radius: 2px 0 0 2px; font-size: 13.5px; font-weight: 500;">
+      <span style="width: 8px; height: 8px; background: #6FA0F5; border-radius: 50%; display: block;"></span>
+      샷 3
+    </div>
+    <div style="flex-grow: 1; height: 44px; display: flex; align-items: center; justify-content: center; gap: 7px; background: #FFFFFF; border: 1px solid #DDE4EC; border-left: 0; border-radius: 0 2px 2px 0; font-size: 13.5px; color: #4B5766;">
+      <span style="width: 8px; height: 8px; background: #12876F; border-radius: 50%; display: block;"></span>
+      푸어 2
+    </div>
+  </div>
+
+  <!-- 산점도 -->
+  <div style="margin: 14px 20px 0; background: #FFFFFF; border: 1px solid #DDE4EC; border-radius: 2px; padding: 15px 16px 10px; display: flex; flex-direction: column; gap: 9px;">
+    <div style="display: flex; align-items: baseline; gap: 9px;">
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700;">샷 로그</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #8B96A5; letter-spacing: 0.12em;">TIME × RATING</span>
+    </div>
+    <svg viewBox="0 0 330 250" style="width: 100%; height: 250px; display: block;">
+      <line x1="38" y1="36" x2="316" y2="36" stroke="#EDF1F6" stroke-width="1"/>
+      <line x1="38" y1="80" x2="316" y2="80" stroke="#EDF1F6" stroke-width="1"/>
+      <line x1="38" y1="124" x2="316" y2="124" stroke="#EDF1F6" stroke-width="1"/>
+      <line x1="38" y1="168" x2="316" y2="168" stroke="#EDF1F6" stroke-width="1"/>
+      <line x1="38" y1="22" x2="38" y2="212" stroke="#C3CDD9" stroke-width="1.2"/>
+      <line x1="38" y1="212" x2="316" y2="212" stroke="#C3CDD9" stroke-width="1.2"/>
+
+      <text x="30" y="40" text-anchor="end" fill="#8B96A5" font-family="IBM Plex Mono, monospace" font-size="10">5</text>
+      <text x="30" y="84" text-anchor="end" fill="#8B96A5" font-family="IBM Plex Mono, monospace" font-size="10">4</text>
+      <text x="30" y="128" text-anchor="end" fill="#8B96A5" font-family="IBM Plex Mono, monospace" font-size="10">3</text>
+      <text x="30" y="172" text-anchor="end" fill="#8B96A5" font-family="IBM Plex Mono, monospace" font-size="10">2</text>
+      <text x="30" y="216" text-anchor="end" fill="#8B96A5" font-family="IBM Plex Mono, monospace" font-size="10">1</text>
+
+      <text x="38" y="232" fill="#8B96A5" font-family="IBM Plex Mono, monospace" font-size="10">15s</text>
+      <text x="177" y="232" text-anchor="middle" fill="#8B96A5" font-family="IBM Plex Mono, monospace" font-size="10">27s</text>
+      <text x="316" y="232" text-anchor="end" fill="#8B96A5" font-family="IBM Plex Mono, monospace" font-size="10">40s</text>
+      <text x="177" y="248" text-anchor="middle" fill="#6E7A8A" font-family="Noto Sans KR, sans-serif" font-size="10">추출시간</text>
+
+      <circle cx="82" cy="80" r="7" fill="#2F6FEB"/>
+      <text x="82" y="68" text-anchor="middle" fill="#4B5766" font-family="Noto Sans KR, sans-serif" font-size="10">블루밍 플로럴</text>
+
+      <circle cx="283" cy="36" r="8.5" fill="#2F6FEB"/>
+      <text x="283" y="23" text-anchor="end" fill="#17202B" font-family="Noto Sans KR, sans-serif" font-size="10.5" font-weight="500">므쵸베리</text>
+
+      <circle cx="127" cy="168" r="7" fill="#FFFFFF" stroke="#D0453B" stroke-width="2"/>
+      <text x="127" y="189" text-anchor="middle" fill="#D0453B" font-family="Noto Sans KR, sans-serif" font-size="10">짙은 · 채널링</text>
+    </svg>
+  </div>
+
+  <!-- 선택한 점 -->
+  <div style="margin: 14px 20px 0; background: #FFFFFF; border: 1px solid #DDE4EC; border-radius: 2px; padding: 15px 16px; display: flex; flex-direction: column; gap: 8px;">
+    <div style="display: flex; align-items: baseline; gap: 8px;">
+      <span style="width: 8px; height: 8px; background: #2F6FEB; border-radius: 50%; display: block;"></span>
+      <span style="font-size: 15px; font-weight: 700; flex-grow: 1;">므쵸베리</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8B96A5; font-variant-numeric: tabular-nums;">08-01</span>
+    </div>
+    <span style="font-size: 12px; color: #6E7A8A;">모모스 · 미디엄라이트 · IMS H26.5M</span>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 12px; padding-top: 3px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #4B5766; font-variant-numeric: tabular-nums;">20g → 40g</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #4B5766; font-variant-numeric: tabular-nums;">1:2.0</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #4B5766; font-variant-numeric: tabular-nums;">37s · 93°C</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: #4B5766; font-variant-numeric: tabular-nums;">다이얼 0.4</span>
+    </div>
+    <span style="font-size: 12px; color: #6E7A8A; line-height: 1.6;">산미 발현이 잘됨, 뒷맛이 깔끔하게 단맛으로 끝남</span>
+  </div>
+
+  <!-- 시트 색인 -->
+  <div style="margin: 16px 20px 0; display: flex; flex-direction: column; flex-grow: 1; min-height: 0;">
+    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: #8B96A5; letter-spacing: 0.2em; padding-bottom: 9px;">SHEETS</span>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
+      <div style="background: #FFFFFF; border: 1px solid #DDE4EC; border-radius: 2px; padding: 10px 11px; display: flex; flex-direction: column; gap: 5px;">
+        <span style="width: 18px; height: 3px; background: #B8873A; display: block;"></span>
+        <span style="font-size: 12.5px; font-weight: 500;">원두 노트</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-variant-numeric: tabular-nums;">5<span style="font-size: 10px; color: #8B96A5;">종</span></span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #DDE4EC; border-radius: 2px; padding: 10px 11px; display: flex; flex-direction: column; gap: 5px;">
+        <span style="width: 18px; height: 3px; background: #E4E9F0; display: block;"></span>
+        <span style="font-size: 12.5px; font-weight: 500; color: #8B96A5;">컵 랩</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #B4BECB; font-variant-numeric: tabular-nums;">0<span style="font-size: 10px;">건</span></span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #DDE4EC; border-radius: 2px; padding: 10px 11px; display: flex; flex-direction: column; gap: 5px;">
+        <span style="width: 18px; height: 3px; background: #2F6FEB; display: block;"></span>
+        <span style="font-size: 12.5px; font-weight: 500;">샷 로그</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-variant-numeric: tabular-nums;">3<span style="font-size: 10px; color: #8B96A5;">건</span></span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #DDE4EC; border-radius: 2px; padding: 10px 11px; display: flex; flex-direction: column; gap: 5px;">
+        <span style="width: 18px; height: 3px; background: #12876F; display: block;"></span>
+        <span style="font-size: 12.5px; font-weight: 500;">푸어 로그</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-variant-numeric: tabular-nums;">2<span style="font-size: 10px; color: #8B96A5;">건</span></span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #DDE4EC; border-radius: 2px; padding: 10px 11px; display: flex; flex-direction: column; gap: 5px;">
+        <span style="width: 18px; height: 3px; background: #7A4FBF; display: block;"></span>
+        <span style="font-size: 12.5px; font-weight: 500;">레시피 북</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-variant-numeric: tabular-nums;">33<span style="font-size: 10px; color: #8B96A5;">개</span></span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #DDE4EC; border-radius: 2px; padding: 10px 11px; display: flex; flex-direction: column; gap: 5px;">
+        <span style="width: 18px; height: 3px; background: #5A6675; display: block;"></span>
+        <span style="font-size: 12.5px; font-weight: 500;">툴 킷</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-variant-numeric: tabular-nums;">26<span style="font-size: 10px; color: #8B96A5;">개</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 14px 20px 24px; display: flex;">
+    <div style="flex-grow: 1; height: 50px; display: flex; align-items: center; justify-content: center; gap: 9px; background: #17202B; color: #FFFFFF; border-radius: 2px; font-size: 15px; font-weight: 500;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      기록 추가
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

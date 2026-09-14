@@ -1,0 +1,492 @@
+<title>한잔록 홈</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── 팔레트 ── 기본은 계기판(흑연). 상단 칩으로 바꾼다. ── */
+:root{
+  --bg:#101319; --gridbg:#151A21; --rail:#0B0D12;
+  --panel:#161B22; --panel2:#10151B;
+  --line:#242C37; --linesoft:#1A212A; --grid:#1C242D; --axis:#2A333E;
+  --fg:#E4E7EC; --mid:#C8D0DA; --dim:#6E7987; --faint:#4C5563;
+  --accent:#E8A33D; --accent2:#6FB6A4; --danger:#E06B52; --onaccent:#14171C;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --sans:'IBM Plex Sans KR',system-ui,sans-serif;
+}
+:root[data-palette="letterpress"]{
+  --bg:#F5F1E8; --gridbg:#EFEADE; --rail:#EFEADF;
+  --panel:#FCFAF5; --panel2:#F2EDE2;
+  --line:#D5CEBE; --linesoft:#E5DFD1; --grid:#E5DFD1; --axis:#B9AF9A;
+  --fg:#1A1815; --mid:#4A443B; --dim:#8A8275; --faint:#A79E8D;
+  --accent:#B8402C; --accent2:#5E7A6B; --danger:#8E2F1F; --onaccent:#F5F1E8;
+}
+:root[data-palette="plot"]{
+  --bg:#FBFBFC; --gridbg:#EDF1F6; --rail:#FFFFFF;
+  --panel:#FFFFFF; --panel2:#F7F9FC;
+  --line:#DDE4EC; --linesoft:#EDF1F6; --grid:#EDF1F6; --axis:#C3CDD9;
+  --fg:#17202B; --mid:#4B5766; --dim:#6E7A8A; --faint:#8B96A5;
+  --accent:#2F6FEB; --accent2:#12876F; --danger:#D0453B; --onaccent:#FFFFFF;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:var(--sans); font-size:14px; line-height:1.6;
+  color:var(--fg); background-color:var(--bg);
+  background-image:linear-gradient(var(--gridbg) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--gridbg) 1px,transparent 1px);
+  background-size:24px 24px;
+  -webkit-font-smoothing:antialiased;
+}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+svg{display:block}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ── 뼈대 ── 모바일 먼저: 한 단으로 쌓는다 ── */
+.shell{
+  display:grid; grid-template-columns:minmax(0,1fr);
+  grid-template-areas:"brand" "main" "sheets" "action";
+  min-height:100vh;
+}
+.brand{grid-area:brand} .main{grid-area:main}
+.sheets{grid-area:sheets} .action{grid-area:action}
+
+/* 상단 */
+.brand{
+  display:flex; align-items:center; gap:10px;
+  padding:16px 20px 14px; background:var(--rail);
+  border-bottom:1px solid var(--line);
+  position:sticky; top:0; z-index:5;
+}
+.mark{display:flex;flex-direction:column;gap:2px;flex-grow:1;min-width:0}
+.mark b{font-size:18px;font-weight:600;letter-spacing:-.02em}
+.mark span{font-family:var(--mono);font-size:10px;color:var(--faint)}
+
+/* 색상 칩 */
+.pal{display:flex;gap:6px;flex:none}
+.pal button{
+  width:30px;height:30px;border-radius:50%;
+  border:1px solid var(--axis); padding:0;
+  display:grid;place-items:center;
+}
+.pal button i{width:16px;height:16px;border-radius:50%;display:block}
+.pal button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 30%,transparent)}
+.pal button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* 본문 */
+.main{padding:16px 20px 0;display:flex;flex-direction:column;gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:4px}
+
+/* 판독 패널 */
+.readout{padding:16px 17px 14px;display:flex;flex-direction:column;gap:13px}
+.rhead{display:flex;align-items:flex-start;gap:10px}
+.rhead div{display:flex;flex-direction:column;gap:3px;flex-grow:1;min-width:0}
+.eyebrow{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.16em}
+.beanname{font-size:17px;font-weight:600;letter-spacing:-.015em}
+.beanmeta{font-size:11.5px;color:var(--dim)}
+.stars{font-family:var(--mono);font-size:12px;color:var(--accent);padding-top:14px;flex:none}
+.rdgrid{display:flex;flex-direction:column;gap:13px}
+.chartbox{background:var(--panel2);border:1px solid var(--line);border-radius:3px;padding:10px 14px 4px}
+.legend{display:flex;gap:16px;padding:4px 0 4px}
+.legend i{width:14px;height:2px;background:var(--accent);display:block}
+.legend span{font-family:var(--mono);font-size:10px;color:var(--dim)}
+.legend div{display:flex;align-items:center;gap:7px}
+.vals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.vals div{background:var(--panel2);padding:9px 10px;display:flex;flex-direction:column;gap:2px}
+.vals dt{font-family:var(--mono);font-size:8.5px;color:var(--faint);letter-spacing:.12em;margin:0}
+.vals dd{font-family:var(--mono);font-size:16px;font-weight:500;margin:0;font-variant-numeric:tabular-nums}
+.vals dd u{text-decoration:none;font-size:10px;color:var(--dim)}
+.vals dd.hot{color:var(--accent)}
+.memo{font-size:12.5px;color:var(--dim);line-height:1.6;border-left:2px solid var(--axis);padding-left:12px}
+
+/* 산점도 */
+.plots{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.plot{padding:15px 16px 10px;display:flex;flex-direction:column;gap:9px}
+.plot h2{margin:0;font-size:13.5px;font-weight:600;display:flex;align-items:baseline;gap:9px}
+.plot h2 span{font-family:var(--mono);font-size:9.5px;color:var(--dim);letter-spacing:.12em;font-weight:400}
+
+/* 요약 */
+.summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.summary div{background:var(--panel);padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.summary dt{font-family:var(--mono);font-size:9px;color:var(--faint);letter-spacing:.14em;margin:0}
+.summary dd{font-family:var(--mono);font-size:19px;font-weight:500;margin:0;font-variant-numeric:tabular-nums}
+.summary dd u{text-decoration:none;font-size:12px;color:var(--dim)}
+.summary dd.word{font-family:var(--sans);font-size:15px;font-weight:600}
+.summary dd.bad{color:var(--danger)}
+
+/* 기록 */
+.records h2{margin:0 0 9px;padding-bottom:9px;border-bottom:1px solid var(--line);
+  font-size:13px;font-weight:600;color:var(--mid);display:flex;align-items:baseline;gap:10px}
+.records h2 span{font-family:var(--mono);font-size:9.5px;color:var(--faint);letter-spacing:.1em;font-weight:400}
+.thead{display:none}
+.rec{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--linesoft)}
+.rec:last-child{border-bottom:0}
+.rdate{font-family:var(--mono);font-size:11px;color:var(--dim);width:38px;flex:none;font-variant-numeric:tabular-nums}
+.rbody{flex-grow:1;display:flex;flex-direction:column;gap:3px;min-width:0}
+.rname{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.rname em{font-style:normal;color:var(--dim);font-size:11.5px}
+.rmeta{font-family:var(--mono);font-size:10.5px;color:var(--dim);font-variant-numeric:tabular-nums}
+.rec .c{display:none}
+.rstar{font-family:var(--mono);font-size:11.5px;color:var(--dim);flex:none}
+.rstar.top{color:var(--accent)}
+.flag{font-family:var(--mono);font-size:9px;color:var(--danger);border:1px solid var(--danger);
+  padding:1px 5px;border-radius:2px;letter-spacing:.06em;display:inline-block;margin-left:5px;vertical-align:1px}
+
+/* 시트 */
+.sheets{padding:16px 20px 0}
+.sheets .lbl{font-family:var(--mono);font-size:9.5px;color:var(--faint);letter-spacing:.2em;display:block;padding-bottom:9px}
+.sheetlist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sheet{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+  padding:10px 11px;display:flex;flex-direction:column;align-items:flex-start;gap:5px;
+  text-align:left;min-height:44px}
+.sheet .sno{display:none}
+.sheet .bar{width:18px;height:3px;background:var(--accent);display:block;flex:none}
+.sheet.off .bar{background:var(--linesoft)}
+.sheet.pour .bar{background:var(--accent2)}
+.sheet.plain .bar{background:var(--axis)}
+.sheet .snm{font-size:12.5px}
+.sheet.off .snm{color:var(--dim)}
+.scount{display:flex;align-items:baseline;gap:2px}
+.sheet .sct{font-family:var(--mono);font-size:15px;font-variant-numeric:tabular-nums}
+.sheet.off .sct{color:var(--faint)}
+.sheet .sun{font-size:10px;color:var(--dim)}
+
+/* 하단 액션 */
+.action{
+  padding:14px 20px calc(18px + env(safe-area-inset-bottom,0px));
+  display:flex;gap:10px;align-items:center;
+  background:var(--rail);border-top:1px solid var(--line);
+  position:sticky;bottom:0;margin-top:16px;
+}
+.add{flex-grow:1;height:50px;display:flex;align-items:center;justify-content:center;gap:9px;
+  background:var(--accent);color:var(--onaccent);border-radius:3px;font-size:15px;font-weight:600}
+.ghost{width:50px;height:50px;display:grid;place-items:center;border:1px solid var(--axis);border-radius:3px}
+.ver{display:none}
+
+/* ══════ 데스크탑 ══════ */
+@media (min-width:900px){
+  .shell{
+    grid-template-columns:316px minmax(0,1fr);
+    grid-template-rows:auto 1fr auto;
+    grid-template-areas:"brand main" "sheets main" "action main";
+  }
+  .brand{
+    position:static;padding:30px 26px 26px;align-items:flex-start;
+    border-bottom:0;border-right:1px solid var(--line);
+  }
+  .mark b{font-size:21px}
+  .mark span{font-size:11px}
+  .pal{padding-top:4px}
+
+  .sheets{background:var(--rail);border-right:1px solid var(--line);padding:0 14px}
+  .sheets .lbl{display:none}
+  .sheetlist{grid-template-columns:minmax(0,1fr);gap:0}
+  .sheet{background:none;border:0;border-left:2px solid transparent;border-radius:3px;
+    flex-direction:row;align-items:center;gap:14px;padding:13px 12px}
+  .sheet .bar{display:none}
+  .sheet .sno{display:block;font-family:var(--mono);font-size:10px;color:var(--faint);width:18px}
+  .sheet .snm{flex-grow:1;font-size:14px;color:var(--mid)}
+  .sheet.on{background:var(--panel);border-left-color:var(--accent)}
+  .sheet.on .snm{color:var(--fg)}
+  .sheet.on .sct{color:var(--accent)}
+  .scount{margin-left:auto;gap:6px}
+  .sheet .sun{color:var(--faint);font-size:11px}
+
+  .action{
+    position:static;margin-top:0;flex-direction:column;gap:10px;align-items:stretch;
+    padding:22px 26px;border-top:1px solid var(--linesoft);border-right:1px solid var(--line);
+  }
+  .add{height:46px;font-size:14px}
+  .ghost{display:none}
+  .ver{display:block;font-family:var(--mono);font-size:10px;color:var(--faint);text-align:center;letter-spacing:.05em}
+
+  .main{padding:30px 34px;gap:20px}
+  .readout{padding:20px 24px 18px;gap:16px}
+  .beanname{font-size:20px}
+  .beanmeta{font-size:12px}
+  .rdgrid{display:grid;grid-template-columns:minmax(0,1fr) 232px;gap:24px;align-items:stretch}
+  .vals{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .vals div{padding:11px 14px;gap:3px}
+  .vals dt{font-size:9px}
+  .vals dd{font-size:20px}
+  .vals dd u{font-size:11px}
+  .chartbox{padding:12px 16px 6px}
+
+  .plots{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+  .plot{padding:16px 20px 12px;gap:10px}
+  .plot h2{font-size:14px}
+  .summary{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .summary div{padding:13px 18px;gap:3px}
+  .summary dd{font-size:21px}
+  .summary dd.word{font-size:16px}
+
+  /* 표로 전환 */
+  .records h2{font-size:13px;border-bottom:0;padding-bottom:0;margin-bottom:10px}
+  .thead,.rec{display:grid;grid-template-columns:88px minmax(0,1fr) 62px 74px 66px 58px 52px;
+    align-items:center;gap:0}
+  .thead{padding:0 12px 8px;border-bottom:1px solid var(--line)}
+  .thead span{font-family:var(--mono);font-size:9.5px;color:var(--faint);letter-spacing:.1em}
+  .thead span:nth-child(n+3){text-align:right}
+  .rec{padding:10px 12px}
+  .rdate{width:auto;font-size:11.5px}
+  .rbody{flex-direction:row;align-items:center;gap:8px;padding-right:14px}
+  .rname{font-size:13px}
+  .rmeta{display:none}
+  .rec .c{display:block;font-family:var(--mono);font-size:12px;color:var(--mid);
+    text-align:right;font-variant-numeric:tabular-nums}
+  .rec .c.hot{color:var(--accent)}
+  .rstar{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="shell">
+
+  <!-- ── 상단 / 레일 머리 ── -->
+  <header class="brand">
+    <div class="mark">
+      <b>한잔록</b>
+      <span>2026.09.14 · 기록 5건</span>
+    </div>
+    <div class="pal" role="group" aria-label="색상 선택">
+      <button type="button" id="pal-instrument" aria-pressed="true" title="계기판 · 흑연" aria-label="계기판 · 흑연">
+        <i style="background:#101319;box-shadow:inset 0 0 0 1px #E8A33D"></i>
+      </button>
+      <button type="button" id="pal-letterpress" aria-pressed="false" title="활판 · 종이" aria-label="활판 · 종이">
+        <i style="background:#F5F1E8;box-shadow:inset 0 0 0 1px #B8402C"></i>
+      </button>
+      <button type="button" id="pal-plot" aria-pressed="false" title="좌표 · 모눈" aria-label="좌표 · 모눈">
+        <i style="background:#FBFBFC;box-shadow:inset 0 0 0 1px #2F6FEB"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── 본문 ── -->
+  <main class="main">
+
+    <!-- 최근 추출 -->
+    <section class="card readout">
+      <div class="rhead">
+        <div>
+          <span class="eyebrow">LAST SHOT · 2026-08-01</span>
+          <span class="beanname">므쵸베리</span>
+          <span class="beanmeta">모모스 · 미디엄라이트 · 개봉 6일차</span>
+        </div>
+        <span class="stars">★5</span>
+      </div>
+
+      <div class="rdgrid">
+        <div class="chartbox">
+          <svg viewBox="0 0 620 150" style="width:100%" role="img"
+               aria-label="추출 압력 곡선. 프리인퓨전 6초간 4바를 유지한 뒤 10바까지 올라가 37초에 8.4바로 끝난다.">
+            <line x1="40" y1="8" x2="40" y2="124" stroke="var(--axis)" stroke-width="1"/>
+            <line x1="40" y1="124" x2="606" y2="124" stroke="var(--axis)" stroke-width="1"/>
+            <line x1="40" y1="34" x2="606" y2="34" stroke="var(--grid)" stroke-width="1" stroke-dasharray="2 5"/>
+            <line x1="40" y1="79" x2="606" y2="79" stroke="var(--grid)" stroke-width="1" stroke-dasharray="2 5"/>
+            <text x="32" y="16" text-anchor="end" fill="var(--dim)" font-family="IBM Plex Mono,monospace" font-size="9">bar</text>
+            <text x="32" y="38" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="9">10</text>
+            <text x="32" y="83" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="9">5</text>
+            <text x="32" y="128" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="9">0</text>
+            <rect x="40" y="8" width="92" height="116" fill="var(--accent)" opacity=".07"/>
+            <text x="46" y="21" fill="var(--dim)" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="0.1em">PI 6s · 4.0 bar</text>
+            <path d="M40 124 L58 106 L88 88 L132 88 L156 34 L210 34 L300 38 L400 41 L500 44 L606 48"
+                  fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="606" cy="48" r="3.2" fill="var(--accent)"/>
+            <text x="40" y="142" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="9">0s</text>
+            <text x="315" y="142" text-anchor="middle" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="9">18s</text>
+            <text x="606" y="142" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="9">37s</text>
+          </svg>
+          <div class="legend"><div><i></i><span>추출 압력 · 프리인퓨전 6초 구간 음영</span></div></div>
+        </div>
+
+        <dl class="vals">
+          <div><dt>DOSE</dt><dd>20.0<u>g</u></dd></div>
+          <div><dt>YIELD</dt><dd>40.0<u>g</u></dd></div>
+          <div><dt>RATIO</dt><dd>1:2.0</dd></div>
+          <div><dt>TIME</dt><dd class="hot">37<u>s</u></dd></div>
+          <div><dt>TEMP</dt><dd>93<u>°C</u></dd></div>
+          <div><dt>GRIND</dt><dd>0.4</dd></div>
+        </dl>
+      </div>
+
+      <p class="memo">산미 발현이 잘됨, 뒷맛이 깔끔하게 단맛으로 끝남</p>
+    </section>
+
+    <!-- 산점도 -->
+    <div class="plots">
+      <section class="card plot">
+        <h2>샷 로그 <span>TIME × RATING</span></h2>
+        <svg viewBox="0 0 400 230" style="width:100%" role="img"
+             aria-label="샷 기록 산점도. 므쵸베리 37초 별점5, 블루밍 플로럴 19초 별점4, 짙은 23초 별점2 채널링.">
+          <line x1="44" y1="36" x2="384" y2="36" stroke="var(--grid)" stroke-width="1"/>
+          <line x1="44" y1="74" x2="384" y2="74" stroke="var(--grid)" stroke-width="1"/>
+          <line x1="44" y1="113" x2="384" y2="113" stroke="var(--grid)" stroke-width="1"/>
+          <line x1="44" y1="151" x2="384" y2="151" stroke="var(--grid)" stroke-width="1"/>
+          <line x1="44" y1="20" x2="44" y2="190" stroke="var(--axis)" stroke-width="1.2"/>
+          <line x1="44" y1="190" x2="384" y2="190" stroke="var(--axis)" stroke-width="1.2"/>
+          <text x="36" y="15" text-anchor="end" fill="var(--dim)" font-size="9.5" font-family="IBM Plex Sans KR,sans-serif">별점</text>
+          <text x="36" y="40" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">5</text>
+          <text x="36" y="78" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">4</text>
+          <text x="36" y="117" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">3</text>
+          <text x="36" y="155" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">2</text>
+          <text x="36" y="194" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">1</text>
+          <text x="44" y="209" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">15s</text>
+          <text x="207" y="209" text-anchor="middle" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">27s</text>
+          <text x="384" y="209" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">40s</text>
+          <text x="214" y="225" text-anchor="middle" fill="var(--dim)" font-size="10" font-family="IBM Plex Sans KR,sans-serif">추출시간</text>
+          <circle cx="98" cy="74" r="7" fill="var(--accent)"/>
+          <text x="98" y="62" text-anchor="middle" fill="var(--mid)" font-size="10.5" font-family="IBM Plex Sans KR,sans-serif">블루밍 플로럴</text>
+          <circle cx="343" cy="36" r="8.5" fill="var(--accent)"/>
+          <text x="343" y="22" text-anchor="end" fill="var(--fg)" font-size="11" font-weight="500" font-family="IBM Plex Sans KR,sans-serif">므쵸베리</text>
+          <circle cx="153" cy="151" r="7" fill="var(--panel)" stroke="var(--danger)" stroke-width="2"/>
+          <text x="153" y="172" text-anchor="middle" fill="var(--danger)" font-size="10.5" font-family="IBM Plex Sans KR,sans-serif">짙은 · 채널링</text>
+        </svg>
+      </section>
+
+      <section class="card plot">
+        <h2>푸어 로그 <span>TIME × RATING</span></h2>
+        <svg viewBox="0 0 400 230" style="width:100%" role="img"
+             aria-label="푸어 기록 산점도. 브라질 카투카이 4분 별점5, 에티오피아 하마쇼 5분35초 별점3.">
+          <line x1="44" y1="36" x2="384" y2="36" stroke="var(--grid)" stroke-width="1"/>
+          <line x1="44" y1="74" x2="384" y2="74" stroke="var(--grid)" stroke-width="1"/>
+          <line x1="44" y1="113" x2="384" y2="113" stroke="var(--grid)" stroke-width="1"/>
+          <line x1="44" y1="151" x2="384" y2="151" stroke="var(--grid)" stroke-width="1"/>
+          <line x1="44" y1="20" x2="44" y2="190" stroke="var(--axis)" stroke-width="1.2"/>
+          <line x1="44" y1="190" x2="384" y2="190" stroke="var(--axis)" stroke-width="1.2"/>
+          <text x="36" y="15" text-anchor="end" fill="var(--dim)" font-size="9.5" font-family="IBM Plex Sans KR,sans-serif">별점</text>
+          <text x="36" y="40" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">5</text>
+          <text x="36" y="78" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">4</text>
+          <text x="36" y="117" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">3</text>
+          <text x="36" y="155" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">2</text>
+          <text x="36" y="194" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">1</text>
+          <text x="44" y="209" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">3:30</text>
+          <text x="214" y="209" text-anchor="middle" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">4:45</text>
+          <text x="384" y="209" text-anchor="end" fill="var(--faint)" font-family="IBM Plex Mono,monospace" font-size="10">6:00</text>
+          <text x="214" y="225" text-anchor="middle" fill="var(--dim)" font-size="10" font-family="IBM Plex Sans KR,sans-serif">총 추출시간</text>
+          <circle cx="112" cy="36" r="8.5" fill="var(--accent2)"/>
+          <text x="112" y="22" text-anchor="middle" fill="var(--fg)" font-size="11" font-weight="500" font-family="IBM Plex Sans KR,sans-serif">브라질 카투카이</text>
+          <circle cx="327" cy="113" r="7" fill="var(--accent2)"/>
+          <text x="327" y="134" text-anchor="end" fill="var(--mid)" font-size="10.5" font-family="IBM Plex Sans KR,sans-serif">에티오피아 하마쇼</text>
+        </svg>
+      </section>
+    </div>
+
+    <!-- 요약 -->
+    <dl class="summary">
+      <div><dt>평균 별점</dt><dd>3.80</dd></div>
+      <div><dt>채널링</dt><dd class="bad">1<u>/3</u></dd></div>
+      <div><dt>최다 로스터리</dt><dd class="word">커피화 <u>3종</u></dd></div>
+      <div><dt>마지막 기록</dt><dd>38<u>일 전</u></dd></div>
+    </dl>
+
+    <!-- 기록 -->
+    <section class="records">
+      <h2>최근 기록 <span>5 ENTRIES</span></h2>
+      <div class="thead" aria-hidden="true">
+        <span>DATE</span><span>BEAN</span><span>DOSE</span><span>RATIO</span><span>TIME</span><span>TEMP</span><span>★</span>
+      </div>
+
+      <div class="rec">
+        <span class="rdate">08-07</span>
+        <span class="rbody">
+          <span class="rname">에티오피아 하마쇼 코코세 <em>· 푸어</em></span>
+          <span class="rmeta">푸어 · 15g / 225g · 5:35 · 95°</span>
+        </span>
+        <span class="c">15.0</span><span class="c">1:15.0</span><span class="c">5:35</span><span class="c">95°</span><span class="c">3</span>
+        <span class="rstar">★3</span>
+      </div>
+
+      <div class="rec">
+        <span class="rdate">08-01</span>
+        <span class="rbody">
+          <span class="rname">므쵸베리 <em>· 샷</em></span>
+          <span class="rmeta">샷 · 20g → 40g · 0:37 · 93°</span>
+        </span>
+        <span class="c">20.0</span><span class="c">1:2.0</span><span class="c hot">0:37</span><span class="c">93°</span><span class="c hot">5</span>
+        <span class="rstar top">★5</span>
+      </div>
+
+      <div class="rec">
+        <span class="rdate">07-20</span>
+        <span class="rbody">
+          <span class="rname">브라질 파젠다엄 카투카이 785 <em>· 푸어</em></span>
+          <span class="rmeta">푸어 · 14g / 220g · 4:00 · 93°</span>
+        </span>
+        <span class="c">14.0</span><span class="c">1:15.7</span><span class="c">4:00</span><span class="c">93°</span><span class="c hot">5</span>
+        <span class="rstar top">★5</span>
+      </div>
+
+      <div class="rec">
+        <span class="rdate">07-15</span>
+        <span class="rbody">
+          <span class="rname">블루밍 플로럴 <em>· 샷</em></span>
+          <span class="rmeta">샷 · 19g → 62g · 0:19 · 93°</span>
+        </span>
+        <span class="c">19.0</span><span class="c">1:3.3</span><span class="c">0:19</span><span class="c">93°</span><span class="c">4</span>
+        <span class="rstar">★4</span>
+      </div>
+
+      <div class="rec">
+        <span class="rdate">07-14</span>
+        <span class="rbody">
+          <span class="rname">짙은 <em>· 샷</em> <span class="flag">채널링</span></span>
+          <span class="rmeta">샷 · 18g → 40g · 0:23 · 92°</span>
+        </span>
+        <span class="c">18.0</span><span class="c">1:2.2</span><span class="c">0:23</span><span class="c">92°</span><span class="c">2</span>
+        <span class="rstar">★2</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── 시트 ── -->
+  <nav class="sheets" aria-label="시트">
+    <span class="lbl">SHEETS</span>
+    <div class="sheetlist">
+      <button type="button" class="sheet on"><span class="sno">01</span><span class="bar"></span><span class="snm">원두 노트</span><span class="scount"><span class="sct">5</span><span class="sun">종</span></span></button>
+      <button type="button" class="sheet off"><span class="sno">02</span><span class="bar"></span><span class="snm">컵 랩</span><span class="scount"><span class="sct">0</span><span class="sun">건</span></span></button>
+      <button type="button" class="sheet"><span class="sno">03</span><span class="bar"></span><span class="snm">샷 로그</span><span class="scount"><span class="sct">3</span><span class="sun">건</span></span></button>
+      <button type="button" class="sheet pour"><span class="sno">04</span><span class="bar"></span><span class="snm">푸어 로그</span><span class="scount"><span class="sct">2</span><span class="sun">건</span></span></button>
+      <button type="button" class="sheet plain"><span class="sno">05</span><span class="bar"></span><span class="snm">레시피 북</span><span class="scount"><span class="sct">33</span><span class="sun">개</span></span></button>
+      <button type="button" class="sheet plain"><span class="sno">06</span><span class="bar"></span><span class="snm">툴 킷</span><span class="scount"><span class="sct">26</span><span class="sun">개</span></span></button>
+    </div>
+  </nav>
+
+  <!-- ── 액션 ── -->
+  <div class="action">
+    <button type="button" class="add">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      기록 추가
+    </button>
+    <button type="button" class="ghost" aria-label="추출 타이머">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+    </button>
+    <span class="ver">v1.23.0 · 2026-09-14</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KEY = "hanjanrok:palette";
+  var names = ["instrument","letterpress","plot"];
+
+  function apply(name){
+    if (name === "instrument") document.documentElement.removeAttribute("data-palette");
+    else document.documentElement.setAttribute("data-palette", name);
+    names.forEach(function(n){
+      var b = document.getElementById("pal-" + n);
+      if (b) b.setAttribute("aria-pressed", String(n === name));
+    });
+    try { localStorage.setItem(KEY, name); } catch(e) {}
+  }
+
+  names.forEach(function(n){
+    var b = document.getElementById("pal-" + n);
+    if (b) b.addEventListener("click", function(){ apply(n); });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e) {}
+  if (saved && names.indexOf(saved) !== -1) apply(saved);
+})();
+</script>
