@@ -16,14 +16,12 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --slate:#4A5568;          /* 베이스 1 — 구조·타이포 */
-  --clay:#C9847A;           /* 베이스 2 — 기본 강조 */
-  --accent:var(--clay);     /* 시트별로 교체됨 */
-
-  --bg:#F3F2F0; --surface:#FFFFFF; --surface2:#EBEAE7;
-  --line:#DCDBD7; --line-soft:#E7E6E3; --track:#E4E3DF;
-  --fg:#333B49; --dim:#77808F; --head:#2C3444; --num:#414A5A;
-  --ink-mix:#232A35;
+  color-scheme:dark;
+  --slate:#2A333E; --clay:#E8A33D; --accent:#E8A33D;
+  --bg:#101319; --surface:#161B22; --surface2:#10151B; --card:#161B22; --rail:#0B0D12;
+  --line:#242C37; --line-soft:#1A212A; --track:#1C242D; --axis:#2A333E;
+  --fg:#E4E7EC; --dim:#6E7987; --head:#F3F5F8; --num:#C8D0DA; --faint:#4C5563;
+  --ink-mix:#F2F6FA; --accent2:#6FB6A4; --danger:#E06B52; --onaccent:#14171C;
   --mono:'IBM Plex Mono',ui-monospace,monospace;
   --sans:'IBM Plex Sans KR',system-ui,sans-serif;
 }
@@ -263,16 +261,14 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 :focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px}
 
 /* ================= 메인 화면 v2 ================= */
-html[data-theme="dark"]{
-  --bg:#191D23; --surface:#222831; --surface2:#2A313B;
-  --line:#343C47; --line-soft:#2C333D; --track:#333A44;
-  --fg:#DDE3EA; --dim:#8C96A4; --head:#F1F4F8; --num:#C6CED9;
-  --ink-mix:#F2F6FA; --slate:#39414F;
+html[data-theme="light"]{
+  color-scheme:light;
+  --slate:#17202B; --clay:#E8A33D; --accent:#E8A33D;
+  --bg:#FBFBFC; --surface:#FFFFFF; --surface2:#F7F9FC; --card:#FFFFFF; --rail:#FFFFFF;
+  --line:#DDE4EC; --line-soft:#EDF1F6; --track:#EDF1F6; --axis:#C3CDD9;
+  --fg:#17202B; --dim:#6E7A8A; --head:#17202B; --num:#4B5766; --faint:#8B96A5;
+  --ink-mix:#17202B; --accent2:#12876F; --danger:#D0453B; --onaccent:#14171C;
 }
-html[data-theme="dark"] .topbar{background:#20262E;border-bottom:1px solid var(--line)}
-html[data-theme="dark"] .sheet.wide{background:linear-gradient(180deg,#252C35,#212831)}
-html[data-theme="dark"] .winbox{box-shadow:0 24px 70px rgba(0,0,0,.5)}
-html[data-theme="dark"] .chip.flag{background:#5A6474;border-color:#5A6474}
 
 body{position:relative}
 
@@ -546,7 +542,6 @@ html,body{overflow-x:hidden}
 /* --- 히어로 배너 --- */
 .banner{position:relative;width:100vw;margin-left:calc(50% - 50vw);
   background:linear-gradient(180deg,#EFEEEB,#E6E5E1);padding:0;overflow:hidden}
-html[data-theme="dark"] .banner{background:linear-gradient(180deg,#20262E,#1C222A)}
 .banner-in{max-width:1080px;margin:0 auto;padding:52px 34px 58px;display:grid;
   grid-template-columns:minmax(240px,.78fr) 1.22fr;gap:26px;align-items:center;min-height:390px}
 .btext .beyebrow{font-size:13px;color:var(--dim);margin-bottom:14px;font-weight:400}
@@ -559,7 +554,6 @@ html[data-theme="dark"] .banner{background:linear-gradient(180deg,#20262E,#1C222
 .bstage{display:flex;align-items:center;justify-content:center}
 .hero-svg{width:100%;max-width:620px;height:auto;color:var(--head);
   --pg-ow:var(--surface);--pg-gy:var(--surface2)}
-html[data-theme="dark"] .hero-svg{--pg-ow:#2A313B;--pg-gy:#333A44}
 .hero-svg g,.hero-svg path,.hero-svg rect,.hero-svg circle,.hero-svg ellipse,.hero-svg line{transition:opacity .35s}
 .bdots{display:flex;gap:7px;justify-content:center;padding:0 0 20px}
 .bdots button{width:8px;height:8px;border-radius:50%;border:0;background:var(--num);opacity:.28;padding:0;transition:.18s}
@@ -676,8 +670,6 @@ html[data-theme="dark"] .hero-svg{--pg-ow:#2A313B;--pg-gy:#333A44}
 .danger{background:none;border:1px solid color-mix(in srgb,#B4483A 45%,transparent);border-radius:8px;
   color:#B4483A;font-size:13px;padding:10px 16px;cursor:pointer;font-family:var(--sans)}
 .danger:hover{background:#B4483A;color:#fff;border-color:#B4483A}
-html[data-theme="dark"] .danger{color:#E88;border-color:color-mix(in srgb,#E88 45%,transparent)}
-html[data-theme="dark"] .danger:hover{background:#B4483A;color:#fff}
 
 .csvmsg{font-size:12.5px;color:var(--dim);margin:0 0 12px;line-height:1.6;font-weight:300}
 .csvta{width:100%;height:260px;background:var(--bg);border:1px solid var(--line);border-radius:9px;
@@ -798,12 +790,14 @@ body.drag-lock *{user-select:none;-webkit-user-select:none}
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500&display=swap');
 
 :root{
-  --slate:#1C1F1B; --clay:#8C7A4B; --accent:#8C7A4B;
-  --bg:#E9EBE6; --surface:#F3F4F1; --surface2:#E3E5DF;
-  --line:rgba(28,31,27,.16); --line-soft:rgba(28,31,27,.10); --track:rgba(28,31,27,.10);
-  --fg:#1C1F1B; --dim:rgba(28,31,27,.60); --head:#1C1F1B; --num:#1C1F1B; --ink-mix:#1C1F1B;
-  --serif:"Gowun Batang",'Nanum Myeongjo',serif;
-  --sans:"Noto Sans KR",-apple-system,system-ui,sans-serif;
+  color-scheme:dark;
+  --slate:#2A333E; --clay:#E8A33D; --accent:#E8A33D;
+  --bg:#101319; --surface:#161B22; --surface2:#10151B; --card:#161B22; --rail:#0B0D12;
+  --line:#242C37; --line-soft:#1A212A; --track:#1C242D; --axis:#2A333E;
+  --fg:#E4E7EC; --dim:#6E7987; --head:#F3F5F8; --num:#C8D0DA; --faint:#4C5563;
+  --ink-mix:#F2F6FA; --accent2:#6FB6A4; --danger:#E06B52; --onaccent:#14171C;
+  --serif:'IBM Plex Sans KR',system-ui,sans-serif;
+  --sans:'IBM Plex Sans KR',system-ui,sans-serif;
 }
 body{font-weight:300;letter-spacing:.01em}
 h1,h2,h3,h4{font-family:var(--serif);font-weight:400;letter-spacing:.01em}
@@ -820,41 +814,6 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;letter-spacing:.01em}
   font-size:11px;letter-spacing:.06em;padding:7px 12px}
 .pillbtn:hover{border-color:var(--accent);color:var(--accent);background:transparent}
 
-/* ── 색인(메인) ── */
-.codex{padding:8px 0 0}
-.codex-plate{padding:46px 0 14px;position:relative}
-.codex-plate h1{font-size:clamp(30px,5vw,44px);margin:0;letter-spacing:.04em}
-.codex-plate .csub{font-size:11px;letter-spacing:.26em;color:var(--dim);margin-top:15px}
-.vlabel{position:absolute;right:2px;top:46px;writing-mode:vertical-rl;text-orientation:upright;
-  font-family:var(--serif);font-size:11px;letter-spacing:.34em;color:var(--accent);
-  white-space:nowrap;line-height:1;height:auto;max-height:none;overflow:visible;
-  -webkit-writing-mode:vertical-rl}
-.plate{margin:10px 0 0;padding:6px 0 0;border:0;color:var(--fg)}
-.plate .plate-svg{display:block;width:100%;height:auto}
-/* 권두 글귀 — 도판 바로 아래 한 줄 */
-.epigraph{margin:6px 0 0;font-family:var(--serif);font-size:14.5px;line-height:1.9;
-  text-align:center;color:var(--accent);letter-spacing:.08em}
-.plate figcaption{margin-top:12px;font-size:10px;letter-spacing:.2em;color:var(--dim);
-  display:flex;align-items:baseline;gap:12px}
-.plate figcaption .fno{font-family:var(--serif);font-size:11.5px;letter-spacing:.16em;color:var(--accent)}
-.toc{border-top:1px solid var(--fg);margin-top:6px}
-.tocitem{display:grid;grid-template-columns:54px 1fr auto;gap:20px;align-items:baseline;width:100%;
-  padding:23px 0;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;
-  color:inherit;transition:padding-left .3s ease}
-.tocitem:hover{padding-left:12px}
-.tno{font-family:var(--serif);font-size:13px;color:var(--accent);letter-spacing:.1em}
-.tnm{font-family:var(--serif);font-size:23px;line-height:1.35}
-.tnm em{display:block;font-family:var(--sans);font-style:normal;font-size:9.5px;letter-spacing:.26em;
-  color:var(--accent);margin-top:8px}
-.tnm span{display:block;font-family:var(--sans);font-size:11.5px;color:var(--dim);margin-top:6px;line-height:1.7}
-.tct{font-size:11.5px;color:var(--dim);white-space:nowrap}
-.tct b{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--fg);margin-right:3px}
-.tocfoot{display:flex;gap:10px;padding:26px 0 70px}
-.tocfoot button{font-family:var(--serif);font-size:13px;letter-spacing:.08em;padding:11px 22px;
-  border:1px solid var(--line);background:transparent;color:var(--fg)}
-.tocfoot button:last-child{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.tocfoot button:hover{border-color:var(--accent);color:var(--accent);background:transparent}
-.tocfoot button:last-child:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
 
 /* ── 시트 페이지 ── */
 .sheadwrap{padding:44px 0 24px;border-bottom:1px solid var(--fg);margin-bottom:26px}
@@ -977,15 +936,6 @@ td.num,.num,.rratio{font-family:var(--serif);font-size:14.5px}
 .empty h3{font-family:var(--serif)}
 .ver-v{font-family:var(--serif)}
 
-/* ── 다크(밤) ── */
-body.dark{--bg:#191B18;--surface:#20231F;--surface2:#262A24;
-  --fg:#E6E7E1;--dim:rgba(230,231,225,.58);--head:#E6E7E1;--num:#E6E7E1;
-  --line:rgba(230,231,225,.18);--line-soft:rgba(230,231,225,.11);--track:rgba(230,231,225,.13);
-  --slate:#E6E7E1;--accent:#B79E63;--clay:#B79E63}
-body.dark .topbar{background:var(--bg);border-bottom-color:var(--fg)}
-body.dark .addbtn.solid{background:var(--accent);color:#191B18;border-color:var(--accent)}
-body.dark .tocfoot button:last-child{background:var(--accent);color:#191B18;border-color:var(--accent)}
-body.dark .toast{background:var(--accent);color:#191B18}
 
 /* 단일 시트 페이지: 중복 제목 줄 제거 */
 .acc.solo{border:0;background:transparent;margin:0}
@@ -1062,14 +1012,12 @@ body.dark .toast{background:var(--accent);color:#191B18}
   .acc-head .adesc{display:none}
   .acc-head .aname{font-size:16px}
   .acc-body{padding:6px 15px 20px}
-  .vlabel{display:none}
   .plate{margin:20px -4px 0;padding:16px 0 10px}
   .epigraph{margin:4px 0 0;font-size:12.5px;line-height:1.85;letter-spacing:.04em}
   .plate .plate-svg{max-height:150px}
   .tocitem{grid-template-columns:38px 1fr;gap:13px;padding:19px 0}
   .tct{grid-column:2;margin-top:5px}
   .wordsub{display:none}
-  .tocfoot{flex-direction:column}
 }
 
 /* ── 도판(圖版) — 색인 상단 셋업 일러스트 ── */
@@ -1099,6 +1047,160 @@ body.dark .plate-fig svg .dk,body.dark .plate-fig svg .dkS{fill:rgba(230,231,225
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 
+/* ══ 홈 — 계기판 ══
+   모바일은 한 단으로 쌓고, 900px 위에서 좌측 시트 레일과 본문 두 단으로 나뉜다.
+   마크업은 한 벌이고 배치만 바뀐다. */
+.hm{display:flex;flex-direction:column;gap:16px;padding:16px 0 36px}
+.hm-main{display:flex;flex-direction:column;gap:16px;min-width:0}
+.hm-card{background:var(--surface);border:1px solid var(--line);border-radius:4px}
+
+.hm-read{padding:16px 17px 14px;display:flex;flex-direction:column;gap:13px}
+.hm-rh{display:flex;align-items:flex-start;gap:10px}
+.hm-rh>div{display:flex;flex-direction:column;gap:3px;flex-grow:1;min-width:0}
+.hm-eye{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.16em}
+.hm-bean{font-size:17px;font-weight:600;letter-spacing:-.015em;color:var(--head)}
+.hm-sub{font-size:11.5px;color:var(--dim)}
+.hm-star{font-family:var(--mono);font-size:12px;color:var(--accent-ink);padding-top:14px;flex:none}
+.hm-grid{display:flex;flex-direction:column;gap:13px}
+.hm-chart{background:var(--surface2);border:1px solid var(--line);border-radius:3px;padding:10px 14px 6px;
+  display:flex;flex-direction:column;justify-content:center}
+.pcurve,.scat{width:100%;display:block}
+.pcurve text,.scat text{font-family:var(--mono)}
+.scat text.kr,.pcurve text.kr{font-family:var(--sans)}
+.hm-leg{display:flex;align-items:center;gap:7px;padding:4px 0 2px}
+.hm-leg i{width:14px;height:2px;background:var(--accent);display:block;flex:none}
+.hm-leg span{font-family:var(--mono);font-size:10px;color:var(--dim)}
+.hm-vals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.hm-vals div{background:var(--surface2);padding:9px 10px;display:flex;flex-direction:column;gap:2px}
+.hm-vals b{font-family:var(--mono);font-size:8.5px;color:var(--faint);letter-spacing:.12em;font-weight:400}
+.hm-vals i{font-style:normal;font-family:var(--mono);font-size:16px;font-weight:500;color:var(--head);
+  font-variant-numeric:tabular-nums}
+.hm-vals i u{text-decoration:none;font-size:10px;color:var(--dim)}
+.hm-vals div.hot i{color:var(--accent-ink)}
+.hm-memo{font-size:12.5px;color:var(--dim);line-height:1.6;border-left:2px solid var(--axis);
+  padding-left:12px;margin:0}
+
+.hm-plots{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.hm-plot{padding:15px 16px 10px;display:flex;flex-direction:column;gap:9px}
+.hm-plot h3{margin:0;font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--head);
+  display:flex;align-items:baseline;gap:9px;letter-spacing:0}
+.hm-plot h3 em{font-style:normal;font-family:var(--mono);font-size:9.5px;color:var(--dim);
+  letter-spacing:.12em;font-weight:400}
+.hm-empty{font-size:12.5px;color:var(--dim);text-align:center;padding:34px 0;margin:0}
+
+.hm-sum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.hm-sum div{background:var(--surface);padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.hm-sum b{font-family:var(--mono);font-size:9px;color:var(--faint);letter-spacing:.14em;font-weight:400}
+.hm-sum i{font-style:normal;font-family:var(--mono);font-size:19px;font-weight:500;color:var(--head);
+  font-variant-numeric:tabular-nums}
+.hm-sum i u{text-decoration:none;font-size:12px;color:var(--dim)}
+.hm-sum div.word i{font-family:var(--sans);font-size:15px;font-weight:600}
+.hm-sum div.bad i{color:var(--danger)}
+
+.hm-recs h3{margin:0 0 9px;padding-bottom:9px;border-bottom:1px solid var(--line);font-family:var(--sans);
+  font-size:13px;font-weight:600;color:var(--num);display:flex;align-items:baseline;gap:10px;letter-spacing:0}
+.hm-recs h3 em{font-style:normal;font-family:var(--mono);font-size:9.5px;color:var(--faint);
+  letter-spacing:.1em;font-weight:400}
+.hm-th{display:none}
+.hm-rec{display:flex;align-items:center;gap:12px;padding:11px 2px;width:100%;text-align:left;
+  background:none;border:0;border-bottom:1px solid var(--line-soft);color:inherit;font-family:var(--sans)}
+.hm-rec:last-child{border-bottom:0}
+.hm-rec:hover{background:var(--accent-wash)}
+.hm-dt{font-family:var(--mono);font-size:11px;color:var(--dim);width:38px;flex:none;font-variant-numeric:tabular-nums}
+.hm-body{flex-grow:1;display:flex;flex-direction:column;gap:3px;min-width:0}
+.hm-nm{font-size:13px;color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.hm-nm em{font-style:normal;color:var(--dim);font-size:11.5px}
+.hm-meta{font-family:var(--mono);font-size:10.5px;color:var(--dim);font-variant-numeric:tabular-nums}
+.hm-rec .c{display:none}
+.hm-rs{font-family:var(--mono);font-size:11.5px;color:var(--dim);flex:none}
+.hm-rs.top{color:var(--accent-ink)}
+.hm-flag{font-family:var(--mono);font-size:9px;color:var(--danger);border:1px solid var(--danger);
+  padding:1px 5px;border-radius:2px;letter-spacing:.06em;display:inline-block;margin-left:5px}
+
+.hm-sheets{display:flex;flex-direction:column;gap:9px}
+.hm-slab{font-family:var(--mono);font-size:9.5px;color:var(--faint);letter-spacing:.2em}
+.hm-slist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.hm-sheet{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:10px 11px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:5px;text-align:left;min-height:44px;
+  color:inherit;font-family:var(--sans)}
+.hm-sheet .hs-no{display:none}
+.hm-sheet .hs-bar{width:18px;height:3px;background:var(--accent);display:block;flex:none}
+.hm-sheet.off .hs-bar{background:var(--line)}
+.hm-sheet .hs-nm{font-size:12.5px;color:var(--fg)}
+.hm-sheet.off .hs-nm{color:var(--dim)}
+.hm-sheet .hs-ct{font-family:var(--mono);font-size:15px;color:var(--head);font-variant-numeric:tabular-nums}
+.hm-sheet.off .hs-ct{color:var(--faint)}
+.hm-sheet .hs-un{font-size:10px;color:var(--dim)}
+.hm-scount{display:flex;align-items:baseline;gap:2px}
+.hm-act{display:flex;gap:10px;padding-top:2px}
+.hm-add{flex-grow:1;height:50px;display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--accent);color:var(--onaccent);border:0;border-radius:3px;font-size:15px;font-weight:600}
+.hm-add:hover{filter:brightness(1.08)}
+.hm-all{width:104px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:3px;
+  border:1px solid var(--axis);background:none;color:var(--dim);font-size:13.5px;font-family:var(--sans)}
+.hm-all:hover{border-color:var(--accent);color:var(--accent-ink)}
+
+@media(min-width:900px){
+  .hm{display:grid;grid-template-columns:280px minmax(0,1fr);gap:28px;align-items:start;padding-top:24px}
+  .hm-sheets{order:-1;position:sticky;top:78px;gap:0}
+  .hm-main{gap:20px}
+  .hm-slab{display:none}
+  .hm-slist{grid-template-columns:minmax(0,1fr);gap:0}
+  .hm-sheet{flex-direction:row;align-items:center;gap:14px;padding:13px 12px;background:none;
+    border:0;border-left:2px solid transparent}
+  .hm-sheet .hs-bar{display:none}
+  .hm-sheet .hs-no{display:block;font-family:var(--mono);font-size:10px;color:var(--faint);width:18px}
+  .hm-sheet .hs-nm{flex-grow:1;font-size:14px;color:var(--num)}
+  .hm-sheet:hover{background:var(--surface);border-left-color:var(--accent)}
+  .hm-scount{margin-left:auto;gap:6px}
+  .hm-sheet .hs-un{width:14px;color:var(--faint);font-size:11px}
+  .hm-act{flex-direction:column;padding-top:16px;margin-top:10px;border-top:1px solid var(--line-soft)}
+  .hm-add{height:46px;font-size:14px}
+  .hm-all{width:100%;height:40px}
+  .hm-read{padding:20px 24px 18px;gap:16px}
+  .hm-bean{font-size:20px}
+  .hm-sub{font-size:12px}
+  .hm-grid{display:grid;grid-template-columns:minmax(0,1fr) 232px;gap:24px;align-items:stretch}
+  .hm-vals{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hm-vals div{padding:11px 14px;gap:3px}
+  .hm-vals i{font-size:20px}
+  .hm-plots{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+  .hm-sum{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .hm-sum div{padding:13px 18px;gap:3px}
+  .hm-sum i{font-size:21px}
+  .hm-sum div.word i{font-size:16px}
+  .hm-th,.hm-rec{display:grid;grid-template-columns:84px minmax(0,1fr) 60px 72px 64px 56px 44px;
+    align-items:center;gap:0}
+  .hm-th{padding:0 12px 8px;border-bottom:1px solid var(--line)}
+  .hm-th span{font-family:var(--mono);font-size:9.5px;color:var(--faint);letter-spacing:.1em}
+  .hm-th span:nth-child(n+3){text-align:right}
+  .hm-rec{padding:10px 12px}
+  .hm-dt{width:auto;font-size:11.5px}
+  .hm-body{flex-direction:row;align-items:center;padding-right:14px}
+  .hm-meta{display:none}
+  .hm-rec .c{display:block;font-family:var(--mono);font-size:12px;color:var(--num);text-align:right;
+    font-variant-numeric:tabular-nums}
+  .hm-rec .c.hot{color:var(--accent-ink)}
+  .hm-rs{display:none}
+}
+
+/* ══ 계기판 보정 ══
+   어두운 바탕으로 바뀌면서 흰색이 박혀 있던 자리를 토큰으로 되돌린다. */
+.save,.addbtn.solid,.seg button[aria-pressed="true"],.type-seg button[aria-pressed="true"],
+.ovact button.solid{
+  background:var(--accent);color:var(--onaccent);border-color:var(--accent)}
+.save:hover,.addbtn.solid:hover,.ovact button.solid:hover{filter:brightness(1.08);color:var(--onaccent)}
+.addbtn:hover{background:var(--accent);color:var(--onaccent);border-color:var(--accent)}
+.f input:focus,.f select:focus,.f textarea:focus{background:var(--surface2)}
+.chip.flag{background:var(--slate);border-color:var(--slate);color:var(--fg)}
+.ovnum,.ritem .rkind,.chiprow button i svg,.promo.wide .wmark svg{color:var(--onaccent)}
+.guidebtn:hover,.pour-r .pstir.on{color:var(--onaccent)}
+.danger{color:var(--danger);border-color:color-mix(in srgb,var(--danger) 45%,transparent)}
+.danger:hover{background:var(--danger);color:var(--onaccent);border-color:var(--danger)}
+.toast{background:var(--accent);color:var(--onaccent)}
+.sheet.all,.sheet.wide{background:var(--surface)}
 </style>
 </head>
 <body>
@@ -1433,70 +1535,6 @@ function todayStr(d){d=d||new Date();const p=n=>String(n).padStart(2,"0");
   return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())}
 
 
-/* ============ 도판 — 홈카페 셋업 라인아트 (도감 판형) ============ */
-const PLATE_SVG=`
-<svg class="plate-svg" viewBox="0 0 660 250" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="엘로치오 마누스S 에스프레소 머신, 포터필터와 탬퍼, V60 드리퍼와 서버, 저울로 구성된 홈카페 셋업 라인 드로잉">
-  <defs>
-    <style>
-      .l{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-      .t{fill:none;stroke:currentColor;stroke-width:1.05;stroke-linecap:round;stroke-linejoin:round;opacity:.62}
-      .g{fill:none;stroke:#8C7A4B;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
-      .gf{fill:#8C7A4B;stroke:none}
-    </style>
-  </defs>
-
-  <!-- 좌대 -->
-  <path class="l" d="M28 208 H632"/>
-  <path class="t" d="M28 214 H632"/>
-
-  <!-- ① 에스프레소 머신 -->
-  <g transform="translate(-146,0)">
-  <path class="l" d="M206 208 V108 q0-9 9-9 h124 q9 0 9 9 v100"/>
-  <path class="l" d="M206 138 H348"/>
-  <path class="t" d="M218 116 h48 M218 126 h30"/>
-  <circle class="l" cx="326" cy="120" r="9"/>
-  <path class="t" d="M326 113 v7 l5 4"/>
-  <!-- 그룹헤드 + 포터필터 -->
-  <path class="l" d="M244 138 v14 h44 v-14"/>
-  <path class="l" d="M250 152 q0 16 16 16 q16 0 16-16"/>
-  <path class="l" d="M266 168 v10"/>
-  <path class="g" d="M266 180 v16"/>
-  <!-- 잔 -->
-  <path class="l" d="M250 196 h34 q-3 12-17 12 q-14 0-17-12"/>
-  <!-- 스팀 레버 · 완드 -->
-  <path class="l" d="M330 138 v34 q0 8-8 8"/>
-  <path class="t" d="M336 146 q10-6 12-16"/>
-  <!-- 컵 워머 -->
-  <path class="t" d="M228 105 h30 M268 105 h22"/>
-  </g>
-  <!-- ② 포터필터 · 탬퍼 -->
-  <g transform="translate(-264,0)">
-  <path class="l" d="M516 208 h74"/>
-  <path class="l" d="M524 208 v-12 q0-8 8-8 h44 q8 0 8 8 v12"/>
-  <path class="l" d="M540 188 q0-22 14-22 q14 0 14 22"/>
-  <path class="l" d="M554 166 v-16"/>
-  <path class="l" d="M544 150 h20 q6 0 6-6 v-8 q0-6-6-6 h-20 q-6 0-6 6 v8 q0 6 6 6 z"/>
-  <path class="t" d="M596 208 v-16 h26 v16"/>
-  <path class="t" d="M600 192 q9-8 18 0"/>
-  </g>
-  <!-- ③ 드리퍼 + 서버 -->
-  <g transform="translate(-244,0)">
-  <path class="l" d="M652 118 h84 l-30 44 h-24 z"/>
-  <path class="t" d="M668 124 l10 30 M690 124 v30 M712 124 l-10 30"/>
-  <path class="g" d="M694 168 v10"/>
-  <path class="l" d="M660 178 h68 v22 q0 8-8 8 h-52 q-8 0-8-8 z"/>
-  <path class="l" d="M728 184 q14 4 14 12 q0 8-14 10"/>
-  <path class="t" d="M668 194 h50"/>
-  </g>
-  <!-- ④ 저울 -->
-  <g transform="translate(-234,0)">
-  <path class="l" d="M782 208 h84 v-16 q0-6-6-6 h-72 q-6 0-6 6 z"/>
-  <path class="l" d="M790 186 h68"/>
-  <path class="t" d="M800 196 h22"/>
-  <circle class="gf" cx="848" cy="197" r="2.6"/>
-  </g>
-</svg>`;
 
 /* ============ 셋업 픽토그램 (업로드 사진 기반) ============ */
 
@@ -1512,7 +1550,7 @@ atlas:`<svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="curren
 };
 
 /* ============ 시트 정의 ============ */
-const GOLD="#8C7A4B";
+const GOLD="#E8A33D";
 const SHEETS=[
   {id:"p-bean", key:"beans",    name:"원두 노트",  en:"BEAN NOTE",   no:"壹", color:GOLD, icon:ICONS.bean, desc:"산지·가공·품종과 로스팅·개봉 경과일을 함께 센다."},
   {id:"p-cup",  key:"cupping",  name:"컵 랩",      en:"CUP LAB",     no:"貳", color:GOLD, icon:ICONS.cup,  desc:"SCA 스타일 8항목을 0.25 단위로 채점하고 총점을 합산한다."},
@@ -1588,7 +1626,7 @@ function showSheets(id){
   renderSheetsPage();
   document.getElementById("page-home").classList.remove("on");
   document.getElementById("page-sheets").classList.add("on");
-  setAccent(id?sheetById(id).color:"#4A5568");
+  setAccent(id?sheetById(id).color:GOLD);
   window.scrollTo({top:0,behavior:"auto"});
   if(id) setTimeout(()=>{
     const el=document.getElementById("acc-"+id);
@@ -1598,7 +1636,7 @@ function showSheets(id){
 function showHome(){
   document.getElementById("page-home").classList.add("on");
   document.getElementById("page-sheets").classList.remove("on");
-  setAccent("#C9847A");
+  setAccent(GOLD);
   window.scrollTo({top:0,behavior:"smooth"});
 }
 /* 시트별 주소 — 각 시트가 독립 페이지처럼 열리고 뒤로가기로 색인 복귀 */
@@ -1645,7 +1683,7 @@ function expandAll(){
   const allOpen=openIds.size===SHEETS.length;
   openIds = allOpen ? new Set() : new Set(SHEETS.map(x=>x.id));
   focusId = allOpen ? null : focusId;
-  if(allOpen) setAccent("#4A5568");
+  if(allOpen) setAccent(GOLD);
   applyOpen();
 }
 function applyOpen(){
@@ -2133,54 +2171,225 @@ function chipsOf(key){
   if(key==="filter"){const F=all("filter");return [`드립 ${F.length}건`,`드리퍼 ${new Set(F.map(r=>r.dripper)).size}종`];}
   return [`장비 ${countOf("gear")}개`,`구분 ${GEAR.length+(USER.gear.length?1:0)}개`];
 }
+/* 계기판(흑연)이 기본이고, 토글하면 좌표(모눈) 라이트로 간다.
+   버튼 글자는 '다음에 눌렀을 때 가는 곳'을 가리킨다. */
 function toggleTheme(){
   const el=document.documentElement;
-  const dark=el.getAttribute("data-theme")==="dark";
-  el.setAttribute("data-theme",dark?"light":"dark");
-  document.getElementById("themebtn").textContent=dark?"🌙 다크":"☀️ 라이트";
-  try{localStorage.setItem("coffeelab:theme",dark?"light":"dark")}catch(e){}
+  const light=el.getAttribute("data-theme")==="light";
+  el.setAttribute("data-theme",light?"dark":"light");
+  const b=document.getElementById("themebtn");
+  if(b) b.textContent=light?"☀️ 라이트":"🌙 다크";
+  try{localStorage.setItem("coffeelab:theme",light?"dark":"light")}catch(e){}
 }
 async function loadTheme(){
-  try{
-    if(localStorage.getItem("coffeelab:theme")==="dark"){
-      document.documentElement.setAttribute("data-theme","dark");
-      document.getElementById("themebtn").textContent="☀️ 라이트";
-    }
-  }catch(e){}
+  const b=document.getElementById("themebtn");
+  let light=false;
+  try{light=localStorage.getItem("coffeelab:theme")==="light"}catch(e){}
+  if(light) document.documentElement.setAttribute("data-theme","light");
+  if(b) b.textContent=light?"🌙 다크":"☀️ 라이트";
 }
 
 
+/* ── 추출 압력 곡선 ──
+   기록된 프리인퓨전 시간·압력, 본압, 추출시간만으로 그린다.
+   유량은 앱이 재지 않으므로 그리지 않는다. */
+function pressureSvg(r){
+  const t=num(r.time), bar=num(r.bar), pi=num(r.pi), piBar=num(r.piBar);
+  if(!(t>0&&bar>0)) return "";
+  const X0=40,X1=606,Y0=124,YT=34, top=Math.max(10,Math.ceil(bar));
+  const sx=v=>X0+(Math.max(0,Math.min(v,t))/t)*(X1-X0);
+  const sy=v=>Y0-(Math.max(0,v)/top)*(Y0-YT);
+  const pts=[[0,0]];
+  if(pi>0&&piBar>0) pts.push([pi*0.3,piBar*0.6],[pi*0.65,piBar],[pi,piBar],[Math.min(pi+1.6,t*0.9),bar]);
+  else pts.push([Math.min(2,t*0.2),bar]);
+  pts.push([t*0.5,bar],[t*0.78,bar*0.95],[t,bar*0.87]);
+  const d=pts.map((q,k)=>(k?"L":"M")+sx(q[0]).toFixed(1)+" "+sy(q[1]).toFixed(1)).join(" ");
+  const band=pi>0?`<rect x="${X0}" y="8" width="${(sx(pi)-X0).toFixed(1)}" height="${Y0-8}" fill="var(--accent)" opacity=".07"/>
+    <text x="${X0+6}" y="21" fill="var(--dim)" font-size="9" letter-spacing="0.1em">PI ${pi}s${piBar?" · "+piBar+" bar":""}</text>`:"";
+  const mid=Math.round(t/2);
+  return `<svg viewBox="0 0 620 150" class="pcurve" role="img" aria-label="추출 압력 곡선 — 최고 ${bar}바, 총 ${t}초">
+    <line x1="${X0}" y1="8" x2="${X0}" y2="${Y0}" stroke="var(--axis)" stroke-width="1"/>
+    <line x1="${X0}" y1="${Y0}" x2="${X1}" y2="${Y0}" stroke="var(--axis)" stroke-width="1"/>
+    <line x1="${X0}" y1="${YT}" x2="${X1}" y2="${YT}" stroke="var(--track)" stroke-width="1" stroke-dasharray="2 5"/>
+    <line x1="${X0}" y1="${(YT+Y0)/2}" x2="${X1}" y2="${(YT+Y0)/2}" stroke="var(--track)" stroke-width="1" stroke-dasharray="2 5"/>
+    <text x="32" y="16" text-anchor="end" fill="var(--dim)" font-size="9">bar</text>
+    <text x="32" y="38" text-anchor="end" fill="var(--faint)" font-size="9">${top}</text>
+    <text x="32" y="${((YT+Y0)/2+4)}" text-anchor="end" fill="var(--faint)" font-size="9">${top/2}</text>
+    <text x="32" y="128" text-anchor="end" fill="var(--faint)" font-size="9">0</text>
+    ${band}
+    <path d="${d}" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${sx(t).toFixed(1)}" cy="${sy(bar*0.87).toFixed(1)}" r="3.2" fill="var(--accent)"/>
+    <text x="${X0}" y="142" fill="var(--faint)" font-size="9">0s</text>
+    <text x="${sx(mid).toFixed(1)}" y="142" text-anchor="middle" fill="var(--faint)" font-size="9">${mid}s</text>
+    <text x="${X1}" y="142" text-anchor="end" fill="var(--faint)" font-size="9">${t}s</text>
+  </svg>`;
+}
+
+/* ── 산점도 ── 추출시간 × 별점.
+   시간 축은 기록 범위에 맞춰 잡는다. 샷과 푸어는 단위가 열 배 넘게 달라 판을 따로 쓴다. */
+/* 점 옆 이름은 판을 넘지 않게 줄인다 — 전체 이름은 아래 표에 있다 */
+const plotLabel=t=>{t=String(t||"—");return t.length>11?t.slice(0,10)+"…":t};
+function scatterSvg(rows,fmt,hue){
+  const pts=rows.filter(r=>num(r.rating)>0&&num(r.x)>0);
+  if(!pts.length) return `<p class="hm-empty">별점이 매겨진 기록이 쌓이면 여기에 찍힌다</p>`;
+  const X0=44,X1=384,Y5=36,Y1=190;
+  const xs=pts.map(q=>num(q.x));
+  let lo=Math.min.apply(null,xs), hi=Math.max.apply(null,xs);
+  const pad=Math.max((hi-lo)*0.28, hi*0.1, 1);
+  lo=Math.max(0,lo-pad); hi=hi+pad;
+  const sx=v=>X0+((v-lo)/(hi-lo))*(X1-X0);
+  const sy=v=>Y1-((v-1)/4)*(Y1-Y5);
+  const grid=[5,4,3,2].map(v=>`<line x1="${X0}" y1="${sy(v).toFixed(1)}" x2="${X1}" y2="${sy(v).toFixed(1)}" stroke="var(--track)" stroke-width="1"/>`).join("");
+  const ylab=[5,4,3,2,1].map(v=>`<text x="36" y="${(sy(v)+4).toFixed(1)}" text-anchor="end" fill="var(--faint)" font-size="10">${v}</text>`).join("");
+  const marks=pts.map(q=>{
+    const cx=sx(num(q.x)), cy=sy(num(q.rating)), best=num(q.rating)>=5;
+    const anchor=cx>X1-64?"end":(cx<X0+64?"start":"middle");
+    const ty=cy>Y5+24?cy-12:cy+21;
+    const dot=q.flag
+      ? `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="7" fill="var(--surface)" stroke="var(--danger)" stroke-width="2"/>`
+      : `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${best?8.5:7}" fill="var(--${hue})"/>`;
+    const col=q.flag?"danger":(best?"head":"num");
+    return dot+`<text class="kr" x="${cx.toFixed(1)}" y="${ty.toFixed(1)}" text-anchor="${anchor}" fill="var(--${col})" font-size="10.5">${esc(plotLabel(q.label))}${q.flag?" · 채널링":""}</text>`;
+  }).join("");
+  return `<svg viewBox="0 0 400 230" class="scat" role="img" aria-label="추출시간과 별점 산점도, 기록 ${pts.length}건">
+    ${grid}
+    <line x1="${X0}" y1="20" x2="${X0}" y2="${Y1}" stroke="var(--axis)" stroke-width="1.2"/>
+    <line x1="${X0}" y1="${Y1}" x2="${X1}" y2="${Y1}" stroke="var(--axis)" stroke-width="1.2"/>
+    <text class="kr" x="36" y="15" text-anchor="end" fill="var(--dim)" font-size="9.5">별점</text>
+    ${ylab}
+    <text x="${X0}" y="209" fill="var(--faint)" font-size="10">${fmt(lo)}</text>
+    <text x="${(X0+X1)/2}" y="209" text-anchor="middle" fill="var(--faint)" font-size="10">${fmt((lo+hi)/2)}</text>
+    <text x="${X1}" y="209" text-anchor="end" fill="var(--faint)" font-size="10">${fmt(hi)}</text>
+    <text class="kr" x="${(X0+X1)/2}" y="225" text-anchor="middle" fill="var(--dim)" font-size="10">추출시간</text>
+    ${marks}
+  </svg>`;
+}
+
+/* 기록 한 줄이 쓰는 값 — 샷과 푸어의 항목 이름이 달라 여기서 맞춘다 */
+function homeRow(r){
+  const esp=r.__t==="espresso";
+  const dose=num(r.dose), out=esp?num(r.yield):num(r.water), t=esp?num(r.time):num(r.total);
+  return {esp, dose, out, t,
+    ratio: dose&&out ? "1:"+(out/dose).toFixed(1) : "—",
+    temp: r.temp!=null&&r.temp!=="" ? num(r.temp)+"°" : "—",
+    time: t ? mmss(t) : "—"};
+}
+
 function renderHome(){
-  const e=all("espresso"),f=all("filter"),b=beansAll();
-  const rated=[...e,...f].filter(r=>r.rating);
-  const avg=rated.length?(rated.reduce((s,r)=>s+Number(r.rating),0)/rated.length).toFixed(2):"—";
+  const e=all("espresso"), f=all("filter"), beans=beansAll();
+  const rows=[...e.map(r=>({...r,__t:"espresso"})),...f.map(r=>({...r,__t:"filter"}))]
+    .sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  const rated=rows.filter(r=>num(r.rating)>0);
+  const avg=rated.length?(rated.reduce((s,r)=>s+num(r.rating),0)/rated.length).toFixed(2):"—";
   const ch=e.filter(r=>r.channel).length;
-  const recent=[...e.map(r=>({...r,kind:"esp"})),...f.map(r=>({...r,kind:"fil"}))]
-    .sort((a,b)=>b.date.localeCompare(a.date)).slice(0,4);
+
+  /* 최근 샷 하나를 판독 패널에 올린다 */
+  const lastEsp=e.slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""))[0];
+  let read="";
+  if(lastEsp){
+    const g=homeRow({...lastEsp,__t:"espresso"});
+    const bean=beans.find(x=>x.name===lastEsp.bean);
+    const openDays=(bean&&bean.open&&lastEsp.date)?days(bean.open,lastEsp.date):null;
+    const sub=[lastEsp.roaster,lastEsp.roast,openDays!=null&&openDays>=0?"개봉 "+openDays+"일차":null]
+      .filter(Boolean).map(esc).join(" · ");
+    const curve=pressureSvg(lastEsp);
+    read=`<section class="hm-card hm-read">
+      <div class="hm-rh">
+        <div>
+          <span class="hm-eye">LAST SHOT · ${esc(lastEsp.date||"")}</span>
+          <span class="hm-bean">${esc(lastEsp.bean||"이름 없는 기록")}</span>
+          <span class="hm-sub">${sub||"&nbsp;"}</span>
+        </div>
+        ${num(lastEsp.rating)?`<span class="hm-star">★${num(lastEsp.rating)}</span>`:""}
+      </div>
+      <div class="hm-grid">
+        ${curve?`<div class="hm-chart">${curve}
+          <div class="hm-leg"><i></i><span>추출 압력 · 프리인퓨전 구간 음영</span></div></div>`:""}
+        <div class="hm-vals">
+          <div><b>DOSE</b><i>${g.dose||"—"}<u>g</u></i></div>
+          <div><b>YIELD</b><i>${g.out||"—"}<u>g</u></i></div>
+          <div><b>RATIO</b><i>${g.ratio}</i></div>
+          <div class="hot"><b>TIME</b><i>${g.t||"—"}<u>s</u></i></div>
+          <div><b>TEMP</b><i>${g.temp}</i></div>
+          <div><b>GRIND</b><i>${esc(lastEsp.grind||"—")}</i></div>
+        </div>
+      </div>
+      ${lastEsp.memo?`<p class="hm-memo">${esc(lastEsp.memo)}</p>`:""}
+    </section>`;
+  }
+
+  const espPts=e.map(r=>({label:r.bean||"—",x:num(r.time),rating:num(r.rating),flag:!!r.channel}));
+  const filPts=f.map(r=>({label:r.bean||"—",x:num(r.total),rating:num(r.rating),flag:false}));
+  const secFmt=v=>Math.round(v)+"s";
+  const minFmt=v=>mmss(Math.round(v));
+
+  /* 원두 아카이브 기준 최다 로스터리 */
+  const byR={}; beans.forEach(x=>{if(x.roaster)byR[x.roaster]=(byR[x.roaster]||0)+1});
+  const topR=Object.keys(byR).sort((a,b)=>byR[b]-byR[a])[0];
+  const gap=rows[0]&&rows[0].date?days(rows[0].date,new Date()):null;
+
+  const recs=rows.slice(0,5).map(r=>{
+    const g=homeRow(r);
+    const best=num(r.rating)>=5;
+    return `<button class="hm-rec" onclick="openEdit('${r.__t}',${srcOf(r)})">
+      <span class="hm-dt">${esc((r.date||"").slice(5))}</span>
+      <span class="hm-body">
+        <span class="hm-nm">${esc(r.bean||"—")} <em>· ${g.esp?"샷":"푸어"}</em>${r.channel?`<span class="hm-flag">채널링</span>`:""}</span>
+        <span class="hm-meta">${g.esp?"샷":"푸어"} · ${g.dose||"—"}g ${g.esp?"→":"/"} ${g.out||"—"}g · ${g.time} · ${g.temp}</span>
+      </span>
+      <span class="c">${g.dose||"—"}</span>
+      <span class="c">${g.ratio}</span>
+      <span class="c${g.esp&&best?" hot":""}">${g.time}</span>
+      <span class="c">${g.temp}</span>
+      <span class="c${best?" hot":""}">${num(r.rating)||"—"}</span>
+      <span class="hm-rs${best?" top":""}">${num(r.rating)?"★"+num(r.rating):"—"}</span>
+    </button>`;
+  }).join("");
 
   document.getElementById("home").innerHTML=`
-  <section class="codex">
-    <div class="codex-plate">
-      <div class="vlabel">한 잔 의 기 록</div>
-      <h1>도감</h1>
-      <div class="csub">${todayStr()} · 기록 ${e.length+f.length}</div>
+  <div class="hm">
+    <div class="hm-main">
+      ${read||`<section class="hm-card hm-read"><p class="hm-empty">첫 기록을 남기면 여기에 판독이 뜬다</p></section>`}
+
+      <div class="hm-plots">
+        <section class="hm-card hm-plot"><h3>샷 로그 <em>TIME × RATING</em></h3>
+          ${scatterSvg(espPts,secFmt,"accent")}</section>
+        <section class="hm-card hm-plot"><h3>푸어 로그 <em>TIME × RATING</em></h3>
+          ${scatterSvg(filPts,minFmt,"accent2")}</section>
+      </div>
+
+      <dl class="hm-sum">
+        <div><b>평균 별점</b><i>${avg}</i></div>
+        <div class="bad"><b>채널링</b><i>${ch}<u>/${e.length}</u></i></div>
+        <div class="word"><b>최다 로스터리</b><i>${topR?esc(topR)+" <u>"+byR[topR]+"종</u>":"—"}</i></div>
+        <div><b>마지막 기록</b><i>${gap!=null?gap+"<u>일 전</u>":"—"}</i></div>
+      </dl>
+
+      <section class="hm-recs">
+        <h3>최근 기록 <em>${rows.length} ENTRIES</em></h3>
+        <div class="hm-th" aria-hidden="true">
+          <span>DATE</span><span>BEAN</span><span>DOSE</span><span>RATIO</span><span>TIME</span><span>TEMP</span><span>★</span>
+        </div>
+        ${recs||`<p class="hm-empty">아직 기록이 없다</p>`}
+      </section>
     </div>
-    <figure class="plate">${PLATE_SVG}
-      <figcaption class="epigraph">흘려보내면 감으로 남고, 적어두면 기준이 된다.</figcaption>
-    </figure>
-    <nav class="toc">
-      ${SHEETS.map(x=>`<button class="tocitem" onclick="openSheets('${x.id}')">
-        <span class="tno">${x.no}</span>
-        <span class="tnm">${x.name}<em>${x.en}</em><span>${x.desc}</span></span>
-        <span class="tct"><b>${countOf(x.key)}</b>${unitOf(x.key)}</span>
-      </button>`).join("")}
+
+    <nav class="hm-sheets" aria-label="시트">
+      <span class="hm-slab">SHEETS</span>
+      <div class="hm-slist">
+        ${SHEETS.map((x,k)=>{const c=countOf(x.key);return `<button class="hm-sheet${c?"":" off"}" onclick="openSheets('${x.id}')">
+          <span class="hs-no">${String(k+1).padStart(2,"0")}</span>
+          <span class="hs-bar"></span>
+          <span class="hs-nm">${x.name}</span>
+          <span class="hm-scount"><span class="hs-ct">${c}</span><span class="hs-un">${unitOf(x.key)}</span></span>
+        </button>`}).join("")}
+      </div>
+      <div class="hm-act">
+        <button class="hm-add" onclick="openModal()">＋ 기록 추가</button>
+        <button class="hm-all" onclick="openSheets()">전체 보기</button>
+      </div>
     </nav>
-    <div class="tocfoot">
-      <button onclick="openSheets()">전체 보기</button>
-      <button onclick="openModal()">＋ 기록 추가</button>
-    </div>
-  </section>
-  `;
+  </div>`;
 }
 
 /* ============ 시트 페이지 ============ */
@@ -3375,9 +3584,10 @@ function recCatChange(){
 }
 
 /* ============ 버전 정보 ============ */
-const APP_VERSION="v1.23.0";
+const APP_VERSION="v1.24.0";
 const APP_BUILD="2026-09-14";
 const CHANGELOG=[
+ ["v1.24.0","2026-09-14","디자인을 계기판으로 전면 교체 — 흑연 바탕에 앰버 한 색, 숫자는 등폭으로 통일 · 홈을 추출 판독으로 재구성: 최근 샷의 압력 곡선과 도징·비율·시간 등 6개 수치, 샷/푸어 산점도(추출시간×별점), 요약 4칸, 최근 기록 표 · 시트 목록을 넓은 화면에서는 좌측 레일로, 좁은 화면에서는 3칸 타일로 배치 · 기록 줄을 누르면 바로 수정 창이 열린다 · 다크가 기본이 되고 토글은 밝은 모눈 배색으로 간다 — 여태 다크 규칙이 body.dark를 보고 있어 토글과 어긋나 있던 문제를 함께 해결 · 도감 표지와 도판은 제거"],
  ["v1.23.0","2026-09-14","화면에 보이지 않던 구버전 홈 화면 코드를 걷어냄(204줄) · 동기화 합치기에서 같은 기록이 중복으로 들어가던 문제 해결 — 항목 순서가 달라도 같은 기록으로 판정 · 필터 기록 한 건의 원두명이 아카이브와 어긋나 원두 정보가 붙지 않던 문제 해결 · 칼리타 웨이브 185와 하리오 스위치를 장비 목록에 추가해 드리퍼 선택에서 바로 고를 수 있게 함 · 장비 순서 저장이 실패하면 알려줌 · 하단 버전 날짜 표기 정정"],
  ["v1.22.4","2026-08-11","모바일 표 정리 — 원두명이 한 글자씩 세로로 쪼개지던 문제 해결(두 줄까지 표시 후 말줄임), 좁은 화면에서는 드리퍼·비율 열을 숨기고 행을 누르면 상세에서 확인하도록 변경"],
  ["v1.22.3","2026-08-10","시트 페이지를 감싸던 테두리 상자를 제거 — 글자가 테두리에 붙어 보이던 문제 해결, 카드 안쪽 여백도 확보"],
